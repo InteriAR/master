@@ -22,7 +22,7 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-import {Navigator} from './client'
+import {Navigator} from './client/Navigator'
 /*
  TODO: Insert your API key below
  */

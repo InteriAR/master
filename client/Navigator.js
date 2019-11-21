@@ -5,4 +5,4 @@ const Navigator = createStackNavigator({
     Home: { screen: Home }
 })
 
-export default Navigator
+export default Navigator;
