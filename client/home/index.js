@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React from 'react'
+import {StyleSheet, View} from 'react-native'
 
 
-export default class Home extends Component {
+export default class Home extends React.Component {
     render() {
         return (
             <View style={styles.container}>
@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center,'
+        justifyContent: 'center'
     }
 })
