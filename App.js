@@ -22,6 +22,7 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
+import router from './client/routers'
 /*
  TODO: Insert your API key below
  */
@@ -77,7 +78,9 @@ export default class ViroSample extends Component {
           <Text style={localStyles.titleText}>
             Choose your desired experience:
           </Text>
-
+          <TouchableHighlight>
+            Home
+          </TouchableHighlight>
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
