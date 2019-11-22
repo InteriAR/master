@@ -8,6 +8,7 @@
  */
 
 import React, { Component } from 'react';
+
 import {
   AppRegistry,
   Text,
@@ -22,10 +23,9 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-import {createStackNavigator} from 'react-navigation-stack'
+import {createSwitchNavigator, createAppContainer} from 'react-navigation'
 
-// import Navigator from './client/Navigator'
-import Home from './client/home'
+// import Home from './client/home'
 /*
  TODO: Insert your API key below
  */
@@ -81,11 +81,11 @@ export default class ViroSample extends Component {
           <Text style={localStyles.titleText}>
               Choose your desired experience:
           </Text>
-          
-          <Text style={localStyles.titleText}>
-            Home
-          </Text>
-      
+
+          {/* <Text style={localStyles.titleText}>
+            
+          </Text> */}
+
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
@@ -137,10 +137,6 @@ export default class ViroSample extends Component {
     })
   }
 }
-
-const Navigator = createStackNavigator({
-  HomeScreen: Home
-})
 
 
 var localStyles = StyleSheet.create({
