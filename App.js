@@ -22,7 +22,10 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-import {Navigator} from './client/Navigator'
+import {createStackNavigator} from 'react-navigation-stack'
+
+// import Navigator from './client/Navigator'
+import Home from './client/home'
 /*
  TODO: Insert your API key below
  */
@@ -76,13 +79,13 @@ export default class ViroSample extends Component {
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Choose your desired experience:
+              Choose your desired experience:
           </Text>
           
           <Text style={localStyles.titleText}>
             Home
           </Text>
-
+      
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
@@ -98,7 +101,7 @@ export default class ViroSample extends Component {
           </TouchableHighlight>
         </View>
       </View>
-    );
+     );
   }
 
   // Returns the ViroARSceneNavigator which will start the AR experience
@@ -134,6 +137,11 @@ export default class ViroSample extends Component {
     })
   }
 }
+
+const Navigator = createStackNavigator({
+  HomeScreen: Home
+})
+
 
 var localStyles = StyleSheet.create({
   viroContainer :{

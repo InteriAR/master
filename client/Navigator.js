@@ -1,8 +1,22 @@
-import { createStackNavigator } from 'react-navigation-stack'
-import Home from './home'
+// import { createAppContainer, createSwitchNavigator} from 'react-navigation'
+// import { createStackNavigator } from 'react-navigation-stack';
+// // import { createBottomTabNavigator } from 'react-navigation-tabs';
+// // import { createDrawerNavigator } from 'react-navigation-drawer';
 
-const Navigator = createStackNavigator({
-    Home: { screen: Home }
-})
 
-export default Navigator;
+// import Home from './home'
+
+// const Navigator = createStackNavigator({
+//     Home: {
+//         screen: Home,
+//         navigationOptions: {
+//             headerTitle: 'Default'
+//         }
+//     }
+// })
+
+// // const Navigator = createSwitchNavigator({
+// //     Home: { screen: Home }
+// // })
+
+// export default createAppContainer(Navigator);
