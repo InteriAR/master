@@ -23,9 +23,12 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-import {createSwitchNavigator, createAppContainer} from 'react-navigation'
+import Home from './screens/home'
+import Categories from './screens/categories'
+import AR from './screens/ar'
 
-// import Home from './client/home'
+import {createSwitchNavigator, createAppContainer } from 'react-navigation'
+
 /*
  TODO: Insert your API key below
  */
@@ -63,6 +66,7 @@ export default class ViroSample extends Component {
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
+    console.log(this)
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == VR_NAVIGATOR_TYPE) {
@@ -75,35 +79,37 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
+      // <View style={localStyles.outer} >
+      //   <View style={localStyles.inner} >
 
-          <Text style={localStyles.titleText}>
-              Choose your desired experience:
-          </Text>
+      //     <Text style={localStyles.titleText}>
+      //         Choose your desired experience:
+      //     </Text>
 
-          {/* <Text style={localStyles.titleText}>
-            
-          </Text> */}
+      //     <TouchableHighlight style={localStyles.buttons}
+      //       onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+      //       underlayColor={'#68a0ff'} >
 
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-            underlayColor={'#68a0ff'} >
+      //       <Text style={localStyles.buttonText}>AR</Text>
+      //     </TouchableHighlight>
 
-            <Text style={localStyles.buttonText}>AR</Text>
-          </TouchableHighlight>
+      //     <TouchableHighlight style={localStyles.buttons}
+      //       onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
+      //       underlayColor={'#68a0ff'} >
 
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
-            underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>VR</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      //       <Text style={localStyles.buttonText}>VR</Text>
+      //     </TouchableHighlight>
+      //   </View>
+      //   <AppNavigator />
+      // </View>
+      <Navigator />
      );
   }
-
+  // _getHomeNavigator() {
+  //   return (
+  //     <AppNavigator />
+  //   )
+  // }
   // Returns the ViroARSceneNavigator which will start the AR experience
   _getARNavigator() {
     return (
@@ -138,6 +144,21 @@ export default class ViroSample extends Component {
   }
 }
 
+const Navigator = createAppContainer(createSwitchNavigator(
+{
+  Home: {screen: props => <Home {...props} /> },
+  Categories: {screen: Categories},
+  AR: {screen: AR},
+}, 
+{
+  initialRouteParams: this._getARNavigator
+},
+{
+  initialRouteName: 'Home'
+}
+))
+
+// const AppNavigator = createAppContainer(Navigator)
 
 var localStyles = StyleSheet.create({
   viroContainer :{

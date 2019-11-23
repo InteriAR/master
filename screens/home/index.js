@@ -1,18 +1,21 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-
+import {StyleSheet, Text, View, Button} from 'react-native'
+import { withNavigation } from 'react-navigation'
 
 class Home extends React.Component {
     render() {
+        console.log(this.props)
         return (
             <View style={styles.container}>
-                <Text>Hi</Text>
+                <Text>Interi-AR</Text>
+                
+                <Button title='Menu' onPress={() => this.props.navigation.navigate('AR')} />
             </View>
         )
     }
 }
 
-export default Home
+export default withNavigation(Home)
 
 const styles = StyleSheet.create({
     container: {

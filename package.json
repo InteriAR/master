@@ -5,6 +5,7 @@
   "scripts": {
     "prestart": "./node_modules/react-viro/bin/run_ngrok.sh",
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "react-devtools": "react-devtools",
     "test": "jest"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
     "jest": "^24.9.0",
     "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "^0.57.0",
+    "react-devtools": "^4.2.0",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
