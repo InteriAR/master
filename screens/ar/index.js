@@ -1,43 +1,69 @@
+// import React, { Component } from 'react';
+
+// import {
+//   AppRegistry,
+//   Text,
+//   View,
+//   StyleSheet,
+//   PixelRatio,
+//   TouchableHighlight,
+// } from 'react-native';
+
+// import {
+//     ViroARScene,
+//     ViroText,
+//     ViroConstants,
+//   } from 'react-viro';
+
+// const initalAR = require('../../js/HelloWorldSceneAR')
+
+// export default class AR extends React.Component {
+//     constructor() {
+//         super()
+//     }
+
+//     render() {
+//         console.log('Navigation works')
+//         console.log(this)
+//         return (
+//             <ViroARScene>
+
+//             </ViroARScene>
+//         )
+//     }
+// }
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 2,
+//         backgroundColor: '#fff',
+//         alignItems: 'center',
+//         justifyContent: 'center'
+//     }
+// })
+
+'use strict';
+
 import React, { Component } from 'react';
 
-import {
-  AppRegistry,
-  Text,
-  View,
-  StyleSheet,
-  PixelRatio,
-  TouchableHighlight,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import {
-  ViroVRSceneNavigator,
+  ViroARScene,
+  ViroText,
+  ViroConstants,
   ViroARSceneNavigator
 } from 'react-viro';
 
-const scene = require('../../js/HelloWorldSceneAR')
+const initalAR = require('../../js/HelloWorldSceneAR')
 
-export default class AR extends React.Component {
-    constructor() {
-        super()
-    }
+export default class AR extends Component {
 
     render() {
-        console.log('Navigation works')
-        console.log(this)
         return (
-            <View style={ styles.container }>
-                <Text>Hi</Text>
-                <ViroARSceneNavigator {...this.state} initialScene={{scene: scene}} />
-            </View>
+            <ViroARSceneNavigator initialScene={{scene: initalAR}} />
         )
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 2,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})
+module.exports = AR;
