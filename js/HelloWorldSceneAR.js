@@ -8,6 +8,8 @@ import {
   ViroARScene,
   ViroText,
   ViroConstants,
+  Viro3DObject,
+  ViroAmbientLight
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -27,7 +29,15 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
+          <ViroAmbientLight color="#ffffff" intensity={200} />
+                <Viro3DObject
+                    source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
+                    type="GLB"
+                    scale={[ 1, 1, 1]}
+                    position={[ 0, 0, -1]}
+
+                />
+        {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
       </ViroARScene>
     );
   }
