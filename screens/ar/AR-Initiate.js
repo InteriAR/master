@@ -8,7 +8,8 @@ import {
   ViroARScene,
   ViroText,
   ViroConstants,
-  Viro3DSceneNavigator
+  Viro3DSceneNavigator,
+  Viro3DObject
 } from 'react-viro';
 
 const initalAR = require('../../js/HelloWorldSceneAR')
@@ -32,7 +33,7 @@ export default class AR extends Component {
     return (
       <Viro3DSceneNavigator initalScence={{scene: t}}>
             <ViroARScene onTrackingUpdated={this._onInitialized} >
-                <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
+                {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
             </ViroARScene>
       </Viro3DSceneNavigator>
 
