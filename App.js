@@ -8,7 +8,7 @@
  */
 
 import React, { Component } from 'react';
-
+import firebase from './firebase'
 import {
   AppRegistry,
   Text,
@@ -51,7 +51,9 @@ var defaultNavigatorType = UNSET;
 export default class ViroSample extends Component {
   constructor() {
     super();
-
+    this.state = {
+      furnitures: []
+    }
     this.state = {
       navigatorType : defaultNavigatorType,
       sharedProps : sharedProps
@@ -63,6 +65,28 @@ export default class ViroSample extends Component {
     this._exitViro = this._exitViro.bind(this);
   }
 
+  componentDidMount() {
+    
+    const url = 'https://api.wayfair.com/v1/3dapi/models'
+    fetch(url, {
+      method: 'GET',
+      // Username: 'vncntts%40gmail.com',
+      // Password: '5ddad2cd38b4b',
+      // hostname: 'api.wayfair.com',
+      // path: '/v1/3dapi/models',
+      // headers: {
+      //   'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36'
+      // }
+    })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json)
+      this.setState({
+        furnitures: json,
+      })
+    })
+    .catch(err => console.error(err))
+  }
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
