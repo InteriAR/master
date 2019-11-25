@@ -10,6 +10,8 @@ class Home extends React.Component {
                 <Text>Interi-AR</Text>
                 
                 <Button title='Menu' onPress={() => this.props.navigation.navigate('AR')} />
+                <Button title='View All Products' onPress={() => this.props.navigation.navigate('Categories')} />
+
             </View>
         )
     }
