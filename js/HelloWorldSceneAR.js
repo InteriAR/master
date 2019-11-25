@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
   ViroARScene,
@@ -11,7 +11,8 @@ import {
   Viro3DObject,
   ViroAmbientLight,
   ViroNode,
-  ViroARPlane
+  ViroARPlane,
+  ViroARPlaneSelector
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -21,7 +22,7 @@ export default class HelloWorldSceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text : "Initializing AR..."
+      text: "Initializing AR..."
     };
 
     // bind 'this' to functions
@@ -31,25 +32,21 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroNode 
-          dragType="FixedToWorld"
-          onDrag={() => {}}
-        >
-          <ViroAmbientLight color="#ffffff" />
-          <ViroARPlane
-            minHeight={0.5}
-            minWidth={0.5}
-            alignment="Horizontal"
-          >
-            <Viro3DObject
-              source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
-              type="GLB"
-              scale={[ 1, 1, 1]}
-              position={[ 0, 0, -1]}
 
-            />
-          </ViroARPlane>
-        </ViroNode>
+        <ViroAmbientLight color="#ffffff" />
+        <ViroARPlaneSelector
+          minHeight={0.5}
+          minWidth={0.5}
+        >
+          <Viro3DObject
+            source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb' }}
+            type="GLB"
+            scale={[1, 1, 1]}
+            position={[0, 0, -1]}
+            dragType="FixedToWorld" onDrag={() => { }}
+          />
+        </ViroARPlaneSelector>
+
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
       </ViroARScene>
     );
@@ -58,7 +55,7 @@ export default class HelloWorldSceneAR extends Component {
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text : "Hello World!"
+        text: "Hello World!"
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
@@ -72,7 +69,7 @@ var styles = StyleSheet.create({
     fontSize: 30,
     color: '#ffffff',
     textAlignVertical: 'center',
-    textAlign: 'center',  
+    textAlign: 'center',
   },
 });
 
