@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View, Button} from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 class Home extends React.Component {
@@ -8,8 +8,9 @@ class Home extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Interi-AR</Text>
-                
+
                 <Button title='Menu' onPress={() => this.props.navigation.navigate('AR')} />
+                <Button title='View All Products' onPress={() => this.props.navigation.navigate('Categories')} />
             </View>
         )
     }
