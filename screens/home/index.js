@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View, Button} from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from  'react-native-vector-icons/dist/FontAwesome'
 
@@ -12,9 +12,8 @@ class Home extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Interi-AR</Text>
-                {/* <Button title='Stuff Happens' onPress={this.consoleMessage} /> */}
-                <Icon name="rocket" size={30} />
                 <Button title='Menu' onPress={() => this.props.navigation.navigate('AR')} />
+                <Button title='View All Products' onPress={() => this.props.navigation.navigate('Categories')} />
             </View>
         )
     }
