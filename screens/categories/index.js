@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import axios from 'axios'
+import {Overlay} from 'react-native-elements'
 // import { wayfairAuth } from './../../secrets'
 
 
@@ -8,6 +9,7 @@ class Categories extends React.Component {
     constructor() {
         super()
         this.state = {
+            isVisible: true,
             products: []
         }
     }
@@ -51,11 +53,20 @@ class Categories extends React.Component {
             )
         })
         return (
-            <View style={styles.container}>
-                <View><Text>categories</Text></View>
-                {/* {productList} */}
-            </View>
-        )
+            // <View style={styles.container}>
+            //     <View><Text>categories</Text></View>
+            //     {/* {productList} */}
+            // </View>
+            <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                        }}
+                    >
+            <Text>Hello from Overlay!</Text>
+            </Overlay>
+        )   
     }
 }
 

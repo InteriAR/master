@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 
 import {StyleSheet, View, TouchableHighlight, Text, Image} from 'react-native';
+import { withNavigation } from 'react-navigation'
 
 import {
   ViroARScene,
@@ -17,12 +18,12 @@ const initalAR = require('../../js/HelloWorldSceneAR')
 export default class AR extends Component {
 
     render() {
-        console.log(this)
+        // console.log(this.props)
         return (
             <View style={style.main}>
                 <ViroARSceneNavigator initialScene={{scene: initalAR}} />
                 <View style={style.centerItems}>
-                    <TouchableHighlight>
+                    <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>
                         <Image style={style.categoryButton} source={require('../../js/res/button.jpg')} />
                     </TouchableHighlight>
                 </View>
@@ -36,7 +37,7 @@ export default class AR extends Component {
     }
 }
 
-module.exports = AR;
+module.exports = withNavigation(AR);
 
 const style = StyleSheet.create({
     main: {

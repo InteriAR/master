@@ -5,16 +5,11 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 class Home extends React.Component {
     render() {
-        console.log('Home', this.props)
-        // consoleMessage = ()\\=> {
-        //     console.log('Hi')
-        // }
         return (
             <View style={styles.container}>
                 <Text>Interi-AR</Text>
-                {/* <Button title='Stuff Happens' onPress={this.consoleMessage} /> */}
-                <Icon name="rocket" size={30} />
-                <Button title='Menu' onPress={() => this.props.navigation.navigate('AR')} />
+                {/* <Button title='Menu'  onPress={() => console.log(this)} /> */}
+                <Button title='Menu'  onPress={() => this.props.navigation.navigate('AR')} />
             </View>
         )
     }
