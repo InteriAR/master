@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
+
+import {StyleSheet, Button, View, TouchableHighlight} from 'react-native';
 
 import {
   ViroARScene,
@@ -10,6 +11,7 @@ import {
   ViroConstants,
   Viro3DObject,
   ViroAmbientLight,
+  ViroButton
   ViroNode,
   ViroARPlane,
   ViroARPlaneSelector
@@ -48,7 +50,7 @@ export default class HelloWorldSceneAR extends Component {
         </ViroARPlaneSelector>
 
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
-      </ViroARScene>
+        </ViroARScene>
     );
   }
 

@@ -8,7 +8,7 @@
  */
 
 import React, { Component } from 'react';
-
+import firebase from './firebase'
 import {
   AppRegistry,
   Text,
@@ -51,7 +51,9 @@ var defaultNavigatorType = UNSET;
 export default class ViroSample extends Component {
   constructor() {
     super();
-
+    this.state = {
+      furnitures: []
+    }
     this.state = {
       navigatorType : defaultNavigatorType,
       sharedProps : sharedProps
@@ -63,6 +65,25 @@ export default class ViroSample extends Component {
     this._exitViro = this._exitViro.bind(this);
   }
 
+  componentDidMount() {
+    const url =  "https://api.wayfair.com/v1/3dapi/models"
+    fetch(url, {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: new Headers({
+        Authorization: 'Basic ' + btoa('vncntts@gmail:5ddad2cd38b4b')
+      })
+    })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log('Working on it...')
+      console.log(json)
+      this.setState({
+        furnitures: json,
+      })
+    })
+    .catch(err => console.error(err))
+  }
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
@@ -149,7 +170,7 @@ const Navigator = createAppContainer(createSwitchNavigator(
   Home: {screen: props => <Home {...props} /> },
   Categories: {screen: Categories},
   AR: {screen: AR},
-}, 
+},
 {
   initialRouteParams: this._getARNavigator
 },
