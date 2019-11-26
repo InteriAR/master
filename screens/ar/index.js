@@ -17,14 +17,20 @@ const initalAR = require('../../js/HelloWorldSceneAR')
 export default class AR extends Component {
 
     render() {
+        console.log(this)
         return (
-            <View style={{ flex: 1}}>
+            <View style={style.main}>
                 <ViroARSceneNavigator initialScene={{scene: initalAR}} />
-                <View style={{position: 'absolute', alignItems: 'center'}}>
+                <View style={style.centerItems}>
                     <TouchableHighlight>
-                        <Image style={style.button} source={require('../../js/res/button.jpg')} />
+                        <Image style={style.categoryButton} source={require('../../js/res/button.jpg')} />
                     </TouchableHighlight>
                 </View>
+                {/* <View style={style.centerItems}>
+                    <TouchableHighlight>
+                        <Image style={style.saveButton} source={require('../../js/res/button.jpg')} />
+                    </TouchableHighlight>
+                </View>             */}
             </View>
         )
     }
@@ -33,14 +39,30 @@ export default class AR extends Component {
 module.exports = AR;
 
 const style = StyleSheet.create({
-    button: {
+    main: {
+        flex: 1, 
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
+    },
+    categoryButton: {
         height: 80,
         width: 80,
         paddingTop: 20,
         paddingBottom: 20,
-        marginTop: 200,
-        marginBottom: 200,
+        marginTop: 100,
+        marginLeft: 175,
+        marginBottom: 70,
         borderRadius: 10,
         borderWidth: 1,
+    },
+    saveButton: {
+        height: 80,
+        width: 80,
+    },
+    centerItems: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute'           
     }
 })

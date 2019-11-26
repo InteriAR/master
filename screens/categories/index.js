@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import axios from 'axios'
-import { wayfairAuth } from './../../secrets'
+// import { wayfairAuth } from './../../secrets'
 
 
 class Categories extends React.Component {
@@ -23,9 +23,9 @@ class Categories extends React.Component {
             try {
                 const allProducts = await Promise.all(
                     wayfairUrls.map(url => axios.get(url, {
-                        headers: {
-                            Authorization: wayfairAuth
-                        }
+                        // headers: {
+                        //     Authorization: wayfairAuth
+                        // }
                     }))
                 )
                 return allProducts
@@ -53,7 +53,7 @@ class Categories extends React.Component {
         return (
             <View style={styles.container}>
                 <View><Text>categories</Text></View>
-                {productList}
+                {/* {productList} */}
             </View>
         )
     }

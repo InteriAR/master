@@ -11,7 +11,7 @@ import {
   ViroConstants,
   Viro3DObject,
   ViroAmbientLight,
-  ViroButton
+  ViroButton,
   ViroNode,
   ViroARPlane,
   ViroARPlaneSelector

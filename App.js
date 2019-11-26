@@ -65,25 +65,6 @@ export default class ViroSample extends Component {
     this._exitViro = this._exitViro.bind(this);
   }
 
-  componentDidMount() {
-    const url =  "https://api.wayfair.com/v1/3dapi/models"
-    fetch(url, {
-      method: 'GET',
-      credentials: 'same-origin',
-      headers: new Headers({
-        Authorization: 'Basic ' + btoa('vncntts@gmail:5ddad2cd38b4b')
-      })
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      console.log('Working on it...')
-      console.log(json)
-      this.setState({
-        furnitures: json,
-      })
-    })
-    .catch(err => console.error(err))
-  }
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
@@ -168,11 +149,8 @@ export default class ViroSample extends Component {
 const Navigator = createAppContainer(createSwitchNavigator(
 {
   Home: {screen: props => <Home {...props} /> },
-  Categories: {screen: Categories},
-  AR: {screen: AR},
-},
-{
-  initialRouteParams: this._getARNavigator
+  Categories: {screen: Categories, mode: 'modal', header: 'none'},
+  AR: {screen: props => <AR {...props} /> },
 },
 {
   initialRouteName: 'Home'
