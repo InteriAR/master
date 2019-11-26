@@ -11,7 +11,7 @@ const App = createStackNavigator({
         screen: Home,
     },
     CategoryButton: {
-        screq: Categories
+        screen: Categories
     },
 })
 
