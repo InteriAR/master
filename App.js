@@ -66,20 +66,17 @@ export default class ViroSample extends Component {
   }
 
   componentDidMount() {
-    
-    const url = 'https://api.wayfair.com/v1/3dapi/models'
+    const url =  "https://api.wayfair.com/v1/3dapi/models"
     fetch(url, {
       method: 'GET',
-      // Username: 'vncntts%40gmail.com',
-      // Password: '5ddad2cd38b4b',
-      // hostname: 'api.wayfair.com',
-      // path: '/v1/3dapi/models',
-      // headers: {
-      //   'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36'
-      // }
+      credentials: 'same-origin',
+      headers: new Headers({
+        Authorization: 'Basic ' + btoa('vncntts@gmail:5ddad2cd38b4b')
+      })
     })
     .then((res) => res.json())
     .then((json) => {
+      console.log('Working on it...')
       console.log(json)
       this.setState({
         furnitures: json,
@@ -173,7 +170,7 @@ const Navigator = createAppContainer(createSwitchNavigator(
   Home: {screen: props => <Home {...props} /> },
   Categories: {screen: Categories},
   AR: {screen: AR},
-}, 
+},
 {
   initialRouteParams: this._getARNavigator
 },

@@ -2,14 +2,15 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Button, View, TouchableHighlight} from 'react-native';
 
 import {
   ViroARScene,
   ViroText,
   ViroConstants,
   Viro3DObject,
-  ViroAmbientLight
+  ViroAmbientLight,
+  ViroButton
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -28,17 +29,22 @@ export default class HelloWorldSceneAR extends Component {
 
   render() {
     return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
+        <ViroARScene onTrackingUpdated={this._onInitialized} >
           <ViroAmbientLight color="#ffffff" intensity={200} />
-                <Viro3DObject
-                    source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
-                    type="GLB"
-                    scale={[ 1, 1, 1]}
-                    position={[ 0, 0, -1]}
-
-                />
+          <Viro3DObject
+            source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
+            type="GLB"
+            scale={[ 1, 1, 1]}
+            position={[ 0, 0, -1]}
+            />
+            {/* <ViroButton 
+              source={require('./res/button.jpg')} 
+              position={[1, 3, -5]}
+              height={2}
+              width={3}
+              /> */}
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
-      </ViroARScene>
+        </ViroARScene>
     );
   }
 
