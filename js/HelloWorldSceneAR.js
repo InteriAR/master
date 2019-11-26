@@ -12,7 +12,6 @@ import {
   Viro3DObject,
   ViroSpotLight,
   ViroAmbientLight,
-  ViroButton
   ViroNode,
   ViroARPlane,
   ViroARPlaneSelector,
@@ -30,6 +29,7 @@ export default class HelloWorldSceneAR extends Component {
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   render() {
@@ -62,7 +62,7 @@ export default class HelloWorldSceneAR extends Component {
               scale={[ 1.3, 1.3, 1.3]}
               position={[ 0, 0, -1]}
               rotation={[0, 0, 0]}
-              onHover={this._onHover}
+              onClick={this._onClick}
             />
           </ViroNode>
         </ViroARPlaneSelector>
@@ -82,8 +82,12 @@ export default class HelloWorldSceneAR extends Component {
     }
   }
 
-  _onHover(isHovering, position, source) {
-    console.log('Hovering fired');
+  _onClick(position, source) {
+    const xRot = this._viro3DObject.rotation[0];
+
+    this._viro3DObject.setNativeProps({
+      rotation: [xRot + 30, 0, 0]
+    });
   }
 }
 

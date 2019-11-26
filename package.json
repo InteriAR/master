@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "*",
     "@react-navigation/core": "^5.0.0-alpha.24",
     "@react-navigation/native": "^5.0.0-alpha.16",
     "firebase": "^7.5.0",

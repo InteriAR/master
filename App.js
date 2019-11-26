@@ -69,7 +69,7 @@ export default class ViroSample extends Component {
     const url =  "https://api.wayfair.com/v1/3dapi/models"
     fetch(url, {
       method: 'GET',
-      credentials: 'same-origin',
+      credentials: 'same-origin'
       headers: new Headers({
         Authorization: 'Basic ' + btoa('vncntts@gmail:5ddad2cd38b4b')
       })
