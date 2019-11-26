@@ -9,9 +9,11 @@ import {
   ViroText,
   ViroConstants,
   Viro3DObject,
+  ViroSpotLight,
   ViroAmbientLight,
   ViroNode,
-  ViroARPlane
+  ViroARPlane,
+  ViroARPlaneSelector,
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -21,7 +23,7 @@ export default class HelloWorldSceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text : "Initializing AR..."
+      text : "Initializing AR...",
     };
 
     // bind 'this' to functions
@@ -31,25 +33,37 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroNode 
-          dragType="FixedToWorld"
-          onDrag={() => {}}
+        <ViroARPlaneSelector
+          minHeight={0.5}
+          minWidth={0.5}
+          alignment="Horizontal"
         >
-          <ViroAmbientLight color="#ffffff" />
-          <ViroARPlane
-            minHeight={0.5}
-            minWidth={0.5}
-            alignment="Horizontal"
+          <ViroNode 
+            dragType="FixedToWorld"
+            onDrag={() => {}}
           >
+            <ViroSpotLight
+              color="#ffffff"
+              attenuationStartDistance={2}
+              attenuationEndDistance={10}
+              position={[0, 2, 1]}
+              direction={[0, 2, -1]}
+              innerAngle={20}
+              outerAngle={45}
+            />
+
+            <ViroAmbientLight color="#ffffff" />
+
             <Viro3DObject
               source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
               type="GLB"
-              scale={[ 1, 1, 1]}
+              scale={[ 1.3, 1.3, 1.3]}
               position={[ 0, 0, -1]}
-
+              rotation={[0, 0, 0]}
+              onHover={this._onHover}
             />
-          </ViroARPlane>
-        </ViroNode>
+          </ViroNode>
+        </ViroARPlaneSelector>
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
       </ViroARScene>
     );
@@ -63,6 +77,10 @@ export default class HelloWorldSceneAR extends Component {
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
+  }
+
+  _onHover(isHovering, position, source) {
+    console.log('Hovering fired');
   }
 }
 
