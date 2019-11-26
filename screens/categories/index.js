@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import axios from 'axios'
-import { wayfairAuth } from './../../secrets'
+import {Overlay} from 'react-native-elements'
+// import { wayfairAuth } from './../../secrets'
 
 
 function Item({ category }) {
@@ -16,6 +17,7 @@ class Categories extends React.Component {
     constructor() {
         super()
         this.state = {
+            isVisible: true,
             products: []
         }
     }
@@ -31,9 +33,9 @@ class Categories extends React.Component {
             try {
                 const allProducts = await Promise.all(
                     wayfairUrls.map(url => axios.get(url, {
-                        headers: {
-                            Authorization: wayfairAuth
-                        }
+                        // headers: {
+                        //     Authorization: wayfairAuth
+                        // }
                     }))
                 )
                 return allProducts
@@ -62,28 +64,46 @@ class Categories extends React.Component {
 
     render() {
 
-        console.log('this.state PRODUCTS------>', this.state.products)
-        const products = this.state.products
-        // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-        // 0: {category: "Accent Chairs", productList: Array(13)}
-        if (this.state.products.length === 0) {
-            return (
-                <View style={styles.container}>
-                    <Text style={styles.loading}> loading.... </Text>
-                </View>
-            )
-        } else {
-            return (
+//         console.log('this.state PRODUCTS------>', this.state.products)
+//         const products = this.state.products
+//         // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+//         // 0: {category: "Accent Chairs", productList: Array(13)}
+//         if (this.state.products.length === 0) {
+//             return (
+//                 <View style={styles.container}>
+//                     <Text style={styles.loading}> loading.... </Text>
+//                 </View>
+//             )
 
-                <View style={styles.container}>
-                    <FlatList
-                        data={products}
-                        renderItem={({ item }) => <Item category={item.category} />}
-                        keyExtractor={item => item.category}
-                    />
-                </View>
-            )
-        }
+//         })
+        return (
+            // <View style={styles.container}>
+            //     <View><Text>categories</Text></View>
+            //     {/* {productList} */}
+            // </View>
+            <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                        }}
+                    >
+            <Text>Hello from Overlay!</Text>
+            </Overlay>
+        )   
+
+//         } else {
+//             return (
+
+//                 <View style={styles.container}>
+//                     <FlatList
+//                         data={products}
+//                         renderItem={({ item }) => <Item category={item.category} />}
+//                         keyExtractor={item => item.category}
+//                     />
+//                 </View>
+//             )
+//         }
 
     }
 }

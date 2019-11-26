@@ -11,9 +11,11 @@
   "dependencies": {
     "@react-navigation/core": "^5.0.0-alpha.24",
     "@react-navigation/native": "^5.0.0-alpha.16",
+    "axios": "^0.19.0",
     "firebase": "^7.5.0",
     "react": "16.8.3",
     "react-native": "0.59.9",
+    "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.5.1",
     "react-native-reanimated": "^1.4.0",
     "react-native-vector-icons": "^6.6.0",

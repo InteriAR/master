@@ -12,7 +12,7 @@ import {
   Viro3DObject,
   ViroSpotLight,
   ViroAmbientLight,
-  ViroButton
+  ViroButton,
   ViroNode,
   ViroARPlane,
   ViroARPlaneSelector,
