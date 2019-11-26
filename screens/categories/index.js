@@ -1,8 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import axios from 'axios'
 import { wayfairAuth } from './../../secrets'
 
+
+function Item({ category }) {
+    return (
+        <View style={styles.item}>
+            <Text style={styles.title}>{category}</Text>
+        </View>
+    );
+}
 
 class Categories extends React.Component {
     constructor() {
@@ -34,28 +42,49 @@ class Categories extends React.Component {
             }
         }
         const productData = await getProducts(); //[{}, {}, {}]
-        const products = []
-        productData.forEach(function (productObj) {
-            products.push(...productObj.data)
+
+        //sort products by categories
+        const productsByClassName = {}
+        productData.forEach(function (prodObj) {
+            const prodList = [...prodObj.data]
+            prodList.forEach(function (prod) {
+                let className = prod.class_name
+                if (productsByClassName.hasOwnProperty(className)) {
+                    productsByClassName[className].push(prod)
+                } else {
+                    productsByClassName[className] = [prod]
+                }
+            })
         })
-        // console.log(products)
-        this.setState({ products: products })
+        const formattedProducts = Object.entries(productsByClassName).map(([k, v]) => ({ category: k, productList: v }))
+        this.setState({ products: formattedProducts })
     }
 
     render() {
-        console.log('hello categories')
+
         console.log('this.state PRODUCTS------>', this.state.products)
-        const productList = this.state.products.map((prod) => {
+        const products = this.state.products
+        // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+        // 0: {category: "Accent Chairs", productList: Array(13)}
+        if (this.state.products.length === 0) {
             return (
-                <View key={prod.id}><Text>{prod.product_name}</Text></View>
+                <View style={styles.container}>
+                    <Text style={styles.loading}> loading.... </Text>
+                </View>
             )
-        })
-        return (
-            <View style={styles.container}>
-                <View><Text>categories</Text></View>
-                {productList}
-            </View>
-        )
+        } else {
+            return (
+
+                <View style={styles.container}>
+                    <FlatList
+                        data={products}
+                        renderItem={({ item }) => <Item category={item.category} />}
+                        keyExtractor={item => item.category}
+                    />
+                </View>
+            )
+        }
+
     }
 }
 
@@ -63,9 +92,20 @@ export default Categories
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: 1,
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
+    },
+    loading: {
+        fontSize: 40,
+        color: 'blue',
+
     }
-})
+});
