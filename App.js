@@ -25,6 +25,8 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
+import Navigator from './screens/Navigator'
+
 import Home from './screens/home'
 import Categories from './screens/categories'
 import AR from './screens/ar'
@@ -155,19 +157,19 @@ export default class ViroSample extends Component {
   }
 }
 
-const Navigator = createAppContainer(createSwitchNavigator(
-  {
-    Home: { screen: props => <Home {...props} /> },
-    Categories: { screen: InsideOverlay, mode: 'modal', header: 'none' },
-    AR: { screen: props => <AR {...props} /> },
-    Details: {
-      screen: DetailsScreen
-    }
-  },
-  {
-    initialRouteName: 'Home'
-  }
-))
+// const Navigator = createAppContainer(createSwitchNavigator(
+//   {
+//     Home: { screen: props => <Home {...props} /> },
+//     Categories: { screen: InsideOverlay, mode: 'modal', header: 'none' },
+//     AR: { screen: props => <AR {...props} /> },
+//     Details: {
+//       screen: DetailsScreen
+//     }
+//   },
+//   {
+//     initialRouteName: 'Home'
+//   }
+// ))
 
 // const AppNavigator = createAppContainer(Navigator)
 
