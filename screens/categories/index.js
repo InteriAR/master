@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Image } from 'react-native'
 import axios from 'axios'
-import { Overlay } from 'react-native-elements'
+import { Overlay, ButtonGroup } from 'react-native-elements'
 import { wayfairAuth } from './../../secrets'
 import ProductByCategory from './allCategories'
+import HackyMenu from './hackyMenu'
+import { ScrollView } from 'react-native-gesture-handler'
 
 
 
@@ -13,8 +15,47 @@ class Categories extends React.Component {
         super()
         this.state = {
             isVisible: true,
-            products: {}
+            products: {},
+            selected: false,
+            selectedCategory: []
         }
+        this.renderButtons = this.renderButtons.bind(this)
+        this.renderSingleCategory = this.renderSingleCategory.bind(this)
+    }
+
+
+    renderSingleCategory(productList) {
+        const list = productList.map(function (prodObj) {
+            const thumbnail = prodObj.thumbnail_image_url
+            return (
+                <View>
+                    <Text style={styles.title}>{prodObj.sku}</Text>
+                    <Image
+                        style={{ width: 75, height: 75 }}
+                        source={{ uri: thumbnail }}
+                    />
+                </View>
+            )
+        })
+        console.log('list', list)
+        return list
+    }
+
+    renderButtons(products) {
+        // const formattedProducts = Object.entries(products).map(([k, v]) => ({ category: k, productList: v }))
+
+        const list = Object.keys(products).map(productKey => {
+            const productList = products[productKey]
+            return (
+                <View key={productKey}>
+                    <TouchableOpacity onPress={() => this.setState({ selected: true, selectedCategory: productList })}>
+                        <Text style={styles.title}>{productKey}</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+
+        })
+        return list
     }
 
     async componentDidMount() {
@@ -62,22 +103,47 @@ class Categories extends React.Component {
 
         console.log('this.state PRODUCTS------>', this.state.products)
         const products = this.state.products
+        const selectedCategory = this.state.selectedCategory
         //         // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}] this.state.products
         //         // 0: {category: "Accent Chairs", productList: Array(13)}
 
-        return (
+        if (this.state.selected === false) {
+            return (
 
-            <Overlay
-                isVisible={this.state.isVisible}
-                onBackdropPress={() => {
-                    this.setState({ isVisible: false })
-                    this.props.navigation.navigate('AR')
-                }}
-            >
-                {/* <Text>Hello from Overlay!</Text> */}
-                <ProductByCategory products={products} />
-            </Overlay>
-        )
+                <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                    }}
+                >
+                    {/* <Text>Hello from Overlay!</Text> */}
+                    {/* <ProductByCategory products={products} /> */}
+                    <View style={styles.container}>
+                        {this.renderButtons(products)}
+                    </View>
+                </Overlay>
+            )
+
+        } else {
+            return (
+
+                <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                    }}
+                >
+                    {/* <Text>Hello from Overlay!</Text> */}
+                    {/* <ProductByCategory products={products} /> */}
+                    <View style={styles.container}>
+                        {this.renderSingleCategory(selectedCategory)}
+                    </View>
+                </Overlay>
+            )
+        }
+
 
     }
 }
