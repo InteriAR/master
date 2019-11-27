@@ -1,9 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
-import dummyReducers from './reducers/dummyReducer'
+import { dummyReducer, productsReducer } from './reducers'
 
-const reducer = combineReducers({ dummyReducers })
+const reducer = combineReducers({
+  text: dummyReducer,
+  products: productsReducer
+})
 
 const store = createStore(
   reducer,

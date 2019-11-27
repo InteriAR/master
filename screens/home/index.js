@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import { connect } from 'react-redux'
-import { dummyAction } from '../../actions/actions'
+// import { dummyAction } from '../../store/actions'
 
 class Home extends React.Component {
     render() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { dummyAction } from '../../actions/actions'
+import { dummyAction } from '../../store/actions'
 
 class InsideOverlay extends React.Component {
   render() {
