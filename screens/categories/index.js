@@ -1,24 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import axios from 'axios'
-import {Overlay} from 'react-native-elements'
-// import { wayfairAuth } from './../../secrets'
+import { Overlay } from 'react-native-elements'
+import { wayfairAuth } from './../../secrets'
+import ProductByCategory from './allCategories'
 
 
-function Item({ category }) {
-    return (
-        <View style={styles.item}>
-            <Text style={styles.title}>{category}</Text>
-        </View>
-    );
-}
+
 
 class Categories extends React.Component {
     constructor() {
         super()
         this.state = {
             isVisible: true,
-            products: []
+            products: {}
         }
     }
 
@@ -33,9 +28,9 @@ class Categories extends React.Component {
             try {
                 const allProducts = await Promise.all(
                     wayfairUrls.map(url => axios.get(url, {
-                        // headers: {
-                        //     Authorization: wayfairAuth
-                        // }
+                        headers: {
+                            Authorization: wayfairAuth
+                        }
                     }))
                 )
                 return allProducts
@@ -58,52 +53,31 @@ class Categories extends React.Component {
                 }
             })
         })
-        const formattedProducts = Object.entries(productsByClassName).map(([k, v]) => ({ category: k, productList: v }))
-        this.setState({ products: formattedProducts })
+        // const formattedProducts = Object.entries(productsByClassName).map(([k, v]) => ({ category: k, productList: v }))
+        // this.setState({ products: formattedProducts })
+        this.setState({ products: productsByClassName })
     }
 
     render() {
 
-//         console.log('this.state PRODUCTS------>', this.state.products)
-//         const products = this.state.products
-//         // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-//         // 0: {category: "Accent Chairs", productList: Array(13)}
-//         if (this.state.products.length === 0) {
-//             return (
-//                 <View style={styles.container}>
-//                     <Text style={styles.loading}> loading.... </Text>
-//                 </View>
-//             )
+        console.log('this.state PRODUCTS------>', this.state.products)
+        const products = this.state.products
+        //         // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}] this.state.products
+        //         // 0: {category: "Accent Chairs", productList: Array(13)}
 
-//         })
         return (
-            // <View style={styles.container}>
-            //     <View><Text>categories</Text></View>
-            //     {/* {productList} */}
-            // </View>
+
             <Overlay
-                    isVisible={this.state.isVisible}
-                    onBackdropPress={() => {
-                        this.setState({ isVisible: false })
-                        this.props.navigation.navigate('AR')
-                        }}
-                    >
-            <Text>Hello from Overlay!</Text>
+                isVisible={this.state.isVisible}
+                onBackdropPress={() => {
+                    this.setState({ isVisible: false })
+                    this.props.navigation.navigate('AR')
+                }}
+            >
+                {/* <Text>Hello from Overlay!</Text> */}
+                <ProductByCategory products={products} />
             </Overlay>
-        )   
-
-//         } else {
-//             return (
-
-//                 <View style={styles.container}>
-//                     <FlatList
-//                         data={products}
-//                         renderItem={({ item }) => <Item category={item.category} />}
-//                         keyExtractor={item => item.category}
-//                     />
-//                 </View>
-//             )
-//         }
+        )
 
     }
 }
