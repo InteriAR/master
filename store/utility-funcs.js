@@ -22,6 +22,7 @@ export function sortByClassName(productData) {
 // 0: {category: "Accent Chairs", productList: Array(13)}
 export function formatProducts(productsByClassName) {
   const formattedProducts = Object.entries(productsByClassName).map(([k, v]) => ({ category: k, productList: v }))
-  this.setState({ products: formattedProducts })
+  // this.setState({ products: formattedProducts })
+  return formattedProducts
 }
 

@@ -1,2 +1,5 @@
 export const SET_TEXT = 'SET_TEXT'
 export const GET_API = 'GET_API'
+export const ALL_CATEGORIES = 'ALL_CATEGORIES'
+export const SINGLE_CATEGORY = 'SINGLE_CATEGORY'
+export const CLEAR_CATEGORY = 'CLEAR_CATEGORY'

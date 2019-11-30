@@ -4,16 +4,11 @@ import axios from 'axios'
 import { Overlay } from 'react-native-elements'
 // import { wayfairAuth } from './../../secrets'
 import { connect } from 'react-redux'
-import { dummyAction, loadModels, loadModelsThunk } from '../../store/actions'
+import { dummyAction, loadModels, loadModelsThunk, singleCategory, clearCategory } from '../../store/actions'
+import CategoryMenu from './category-menu'
 
 
-function Item({ category }) {
-    return (
-        <View style={styles.item}>
-            <Text style={styles.title}>{category}</Text>
-        </View>
-    );
-}
+
 
 class Categories extends React.Component {
     constructor() {
@@ -22,9 +17,10 @@ class Categories extends React.Component {
             isVisible: true
         }
     }
-    // componentDidMount() {
-    //     this.props.getModels()
-    // }
+    componentDidMount() {
+        this.props.getModels()
+        // this.props.clearSingleCategory()
+    }
 
     // async componentDidMount() {
     //     console.log('inside did mount')
@@ -81,28 +77,48 @@ class Categories extends React.Component {
     //         })
     render() {
         console.log('this props inside categories', this.props)
-        return (
-            // <View style={styles.container}>
-            //     <View><Text>categories</Text></View>
-            //     {/* {productList} */}
-            // </View>
-            <Overlay
-                isVisible={this.state.isVisible}
-                onBackdropPress={() => {
-                    this.setState({ isVisible: false })
-                    this.props.navigation.navigate('AR')
-                }}
-            >
-                <Text>Hello from Overlay!</Text>
-                <Button
-                    title="Go to Details"
-                    onPress={() => {
-                        this.props.getModels()
-                        this.props.navigation.navigate('Details')
+        const products = this.props.products
+        const category = this.props.category
+
+        if (category.length === 0) {
+            return (
+                // <View style={styles.container}>
+                //     <View><Text>categories</Text></View>
+                //     {/* {productList} */}
+                // </View>
+                <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
                     }}
-                />
-            </Overlay>
-        )
+                >
+                    <CategoryMenu products={products} />
+
+                </Overlay>
+            )
+        } else {
+            return (
+                <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                        this.props.clearSingleCategory()
+                    }}
+                >
+                    <Text>category exists!</Text>
+
+                </Overlay>
+            )
+        }
+        // <Text>Hello from Overlay!</Text>
+        // <Button
+        //     title="Go to Details"
+        //     onPress={() => {
+        //         // this.props.getModels()
+        //         // this.props.navigation.navigate('Details')
+        //     }}
 
         //         } else {
         //             return (
@@ -121,14 +137,17 @@ class Categories extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log('categories state', state)
     return {
-        state: this.state
+        products: state.products,
+        category: state.category
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getModels: () => dispatch(loadModelsThunk())
+        getModels: () => dispatch(loadModelsThunk()),
+        clearSingleCategory: () => dispatch(clearCategory())
     }
 }
 

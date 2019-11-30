@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -17,13 +17,31 @@ export function dummyReducer(text = 'no action', action) {
 
 }
 
-export function productsReducer(products = 'no action', action) {
+export function productsReducer(products = {}, action) {
   switch (action.type) {
     case GET_API:
-      console.log('inside productsReducer')
+      // console.log('inside productsReducer')
       return action.products
     default:
       return products
+  }
+}
+
+export function categoryReducer(category = [], action) {
+  switch (action.type) {
+    case ALL_CATEGORIES: {
+      console.log('action in menu reducer', action.menu)
+      return action.menu
+    }
+    case SINGLE_CATEGORY: {
+      console.log('inside category reducer')
+      return action.category
+    }
+    case CLEAR_CATEGORY: {
+      return []
+    }
+    default:
+      return category
   }
 }
 
