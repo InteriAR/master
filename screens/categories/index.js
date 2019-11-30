@@ -1,114 +1,75 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import axios from 'axios'
-import {Overlay} from 'react-native-elements'
-// import { wayfairAuth } from './../../secrets'
-
-
-function Item({ category }) {
-    return (
-        <View style={styles.item}>
-            <Text style={styles.title}>{category}</Text>
-        </View>
-    );
-}
+import { Overlay } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { dummyAction, loadModels, loadModelsThunk, singleCategory, clearCategory } from '../../store/actions'
+import CategoryMenu from './category-menu'
+import ProductsByCategory from './products-by-category'
 
 class Categories extends React.Component {
     constructor() {
         super()
         this.state = {
-            isVisible: true,
-            products: []
+            isVisible: true
         }
     }
-
-    async componentDidMount() {
-        console.log('inside did mount')
-        const wayfairUrls = [
-            'https://api.wayfair.com/v1/3dapi/models?page=1',
-            'https://api.wayfair.com/v1/3dapi/models?page=2',
-            'https://api.wayfair.com/v1/3dapi/models?page=3'
-        ]
-        const getProducts = async () => {
-            try {
-                const allProducts = await Promise.all(
-                    wayfairUrls.map(url => axios.get(url, {
-                        // headers: {
-                        //     Authorization: wayfairAuth
-                        // }
-                    }))
-                )
-                return allProducts
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        const productData = await getProducts(); //[{}, {}, {}]
-
-        //sort products by categories
-        const productsByClassName = {}
-        productData.forEach(function (prodObj) {
-            const prodList = [...prodObj.data]
-            prodList.forEach(function (prod) {
-                let className = prod.class_name
-                if (productsByClassName.hasOwnProperty(className)) {
-                    productsByClassName[className].push(prod)
-                } else {
-                    productsByClassName[className] = [prod]
-                }
-            })
-        })
-        const formattedProducts = Object.entries(productsByClassName).map(([k, v]) => ({ category: k, productList: v }))
-        this.setState({ products: formattedProducts })
+    componentDidMount() {
+        this.props.getModels()
     }
 
     render() {
+        console.log('this props inside categories', this.props)
+        const products = this.props.products
+        const category = this.props.category
 
-//         console.log('this.state PRODUCTS------>', this.state.products)
-//         const products = this.state.products
-//         // (13)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-//         // 0: {category: "Accent Chairs", productList: Array(13)}
-//         if (this.state.products.length === 0) {
-//             return (
-//                 <View style={styles.container}>
-//                     <Text style={styles.loading}> loading.... </Text>
-//                 </View>
-//             )
-
-//         })
-        return (
-            // <View style={styles.container}>
-            //     <View><Text>categories</Text></View>
-            //     {/* {productList} */}
-            // </View>
-            <Overlay
+        if (category.length === 0) {
+            return (
+                <Overlay
                     isVisible={this.state.isVisible}
                     onBackdropPress={() => {
                         this.setState({ isVisible: false })
                         this.props.navigation.navigate('AR')
-                        }}
-                    >
-            <Text>Hello from Overlay!</Text>
-            </Overlay>
-        )   
+                    }}
+                >
+                    <CategoryMenu products={products} />
+                </Overlay>
+            )
+        } else {
+            return (
+                <Overlay
+                    isVisible={this.state.isVisible}
+                    onBackdropPress={() => {
+                        this.setState({ isVisible: false })
+                        this.props.navigation.navigate('AR')
+                        this.props.clearSingleCategory()
+                    }}
+                >
+                    <Text>category exists!</Text>
+                    <ProductsByCategory category={category} />
 
-//         } else {
-//             return (
-
-//                 <View style={styles.container}>
-//                     <FlatList
-//                         data={products}
-//                         renderItem={({ item }) => <Item category={item.category} />}
-//                         keyExtractor={item => item.category}
-//                     />
-//                 </View>
-//             )
-//         }
-
+                </Overlay>
+            )
+        }
     }
 }
 
-export default Categories
+const mapStateToProps = state => {
+    console.log('categories state', state)
+    return {
+        products: state.products,
+        category: state.category
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getModels: () => dispatch(loadModelsThunk()),
+        clearSingleCategory: () => dispatch(clearCategory())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)
 
 const styles = StyleSheet.create({
     container: {
