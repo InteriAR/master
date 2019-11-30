@@ -6,6 +6,7 @@ import { singleCategory } from '../../store/actions'
 // import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
+
 export function Item({ category, productList, selected, onSelect, handlePress }) {
   return (
     <TouchableOpacity
@@ -32,17 +33,17 @@ function CategoryMenu(props) {
   // console.log('categories', categories)
   const { handlePress } = props
 
-  const [selected, setSelected] = React.useState(new Map());
+  // const [selected, setSelected] = React.useState(new Map());
 
-  const onSelect = React.useCallback(
-    category => {
-      const newSelected = new Map(selected);
-      newSelected.set(category, !selected.get(category));
+  // const onSelect = React.useCallback(
+  //   category => {
+  //     const newSelected = new Map(selected);
+  //     newSelected.set(category, !selected.get(category));
 
-      setSelected(newSelected);
-    },
-    [selected],
-  );
+  //     setSelected(newSelected);
+  //   },
+  //   [selected],
+  // );
 
 
   if (formattedProducts.length === 0) {

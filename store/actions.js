@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL } from './action-type'
 import { sortByClassName, formatProducts } from './utility-funcs.js'
 import axios from 'axios'
 import { wayfairAuth } from './../secrets'
@@ -37,6 +37,13 @@ export const singleCategory = (category) => {
 export const clearCategory = () => {
   return {
     type: CLEAR_CATEGORY
+  }
+}
+
+export const addModel = (models) => {
+  return {
+    type: ADD_MODEL,
+    models
   }
 }
 

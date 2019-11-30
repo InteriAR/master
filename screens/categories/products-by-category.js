@@ -1,18 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Image } from 'react-native'
-import { sortByClassName, formatProducts } from './../../store/utility-funcs'
-import { singleCategory } from '../../store/actions'
+// import { sortByClassName, formatProducts } from './../../store/utility-funcs'
+import { addModel } from '../../store/actions'
 // import { Link } from 'react-router-dom';
 // import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
-export function Item({ name, thumbnail, model, selected }) {
+export function Item({ name, thumbnail, model, selected, handlePress }) {
   return (
     <TouchableOpacity
-      // onPress={() => handlePress(productList)}
-      onPress={() => console.log(model)}
-      // onPress={() => Alert.alert('Simple Button pressed')}
-      // onPress={() => onSelect(category)}
+      onPress={() => handlePress(model)}
       style={[
         styles.item,
         { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
@@ -23,30 +20,25 @@ export function Item({ name, thumbnail, model, selected }) {
         style={{ width: 150, height: 150 }}
         source={{ uri: thumbnail }}
       />
-      {/* <Text style={styles.title}>{productList}</Text> */}
     </TouchableOpacity>
   );
 }
 
 function ProductsByCategory(props) {
   const category = props.category //an array
-  console.log('inside productsbycategory', category)
+  // console.log('inside productsbycategory', category)
   // (15)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+  const { handlePress } = props
   return (
-    // <View style={styles.container}>
-    //   <Text style={styles.loading}> inside ProductsByCategory </Text>
-    // </View>
     <View style={styles.container}>
       <FlatList
-        // contentContainerStyle={styles.container}
-        // numColumns={2}
         data={category}
         renderItem={({ item }) => (
           <Item
             name={item.product_name}
             thumbnail={item.thumbnail_image_url}
             model={item.model.glb}
-          // handlePress={handlePress}
+            handlePress={handlePress}
 
           />)}
         keyExtractor={item => item.sku}
@@ -55,7 +47,26 @@ function ProductsByCategory(props) {
   )
 }
 
-export default ProductsByCategory
+const mapStateToProps = (state) => {
+  return {
+    models: state.models
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handlePress(model) {
+      dispatch(addModel(model))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductsByCategory);
+
+// export default ProductsByCategory
 
 const styles = StyleSheet.create({
   container: {
