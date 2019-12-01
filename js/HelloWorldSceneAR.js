@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 
-import {StyleSheet, Button, View, TouchableHighlight} from 'react-native';
+import { StyleSheet, Button, View, TouchableHighlight } from 'react-native';
 
 import {
   ViroARScene,
@@ -18,7 +18,7 @@ import {
   ViroARPlaneSelector,
 } from 'react-viro';
 
-export default class HelloWorldSceneAR extends Component {
+class HelloWorldSceneAR extends Component {
 
   constructor() {
     super();
@@ -33,6 +33,9 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
+    console.log('props inside helloAR', this.props)
+    const currModel = this.props.arSceneNavigator.viroAppProps.selectedModel
+    console.log('currModel', currModel)
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         <ViroARPlaneSelector
@@ -40,9 +43,9 @@ export default class HelloWorldSceneAR extends Component {
           minWidth={0.5}
           alignment="Horizontal"
         >
-          <ViroNode 
+          <ViroNode
             dragType="FixedToWorld"
-            onDrag={() => {}}
+            onDrag={() => { }}
           >
             <ViroSpotLight
               color="#ffffff"
@@ -57,10 +60,10 @@ export default class HelloWorldSceneAR extends Component {
             <ViroAmbientLight color="#ffffff" />
 
             <Viro3DObject
-              source={{ uri: 'http://img.wfrcdn.com/docresources/30808/118/1180601.glb'}}
+              source={{ uri: currModel }}
               type="GLB"
-              scale={[ 1.3, 1.3, 1.3]}
-              position={[ 0, 0, -1]}
+              scale={[1.3, 1.3, 1.3]}
+              position={[0, 0, -1]}
               rotation={[0, 0, 0]}
               onHover={this._onHover}
             />
@@ -68,7 +71,7 @@ export default class HelloWorldSceneAR extends Component {
         </ViroARPlaneSelector>
 
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
-        </ViroARScene>
+      </ViroARScene>
     );
   }
 
@@ -97,4 +100,6 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = HelloWorldSceneAR;
+// module.exports = HelloWorldSceneAR;
+
+export default HelloWorldSceneAR

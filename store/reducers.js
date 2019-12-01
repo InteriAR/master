@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -29,12 +29,12 @@ export function productsReducer(products = {}, action) {
 
 export function categoryReducer(category = [], action) {
   switch (action.type) {
-    case ALL_CATEGORIES: {
-      console.log('action in menu reducer', action.menu)
-      return action.menu
-    }
+    // case ALL_CATEGORIES: {
+    //   // console.log('action in menu reducer', action.menu)
+    //   return action.menu
+    // }
     case SINGLE_CATEGORY: {
-      console.log('inside category reducer')
+      // console.log('inside category reducer')
       return action.category
     }
     case CLEAR_CATEGORY: {
@@ -44,5 +44,28 @@ export function categoryReducer(category = [], action) {
       return category
   }
 }
+
+//models should be array of objects - each object is the product/model info
+export function modelsReducer(models = [], action) {
+  switch (action.type) {
+    case ADD_MODEL:
+      // console.log('modelsReducer', [...models, action.models])
+      return [...models, action.models]
+    default:
+      return models
+  }
+}
+
+export function selectedModelReducer(selectedModel = {}, action) {
+  switch (action.type) {
+    case SINGLE_MODEL:
+      return action.selectedModel
+    case GET_SINGLE_MODEL:
+      return selectedModel
+    default:
+      return selectedModel
+  }
+}
+
 
 // export default { dummyReducer, productsReducer }

@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL } from './action-type'
 import { sortByClassName, formatProducts } from './utility-funcs.js'
 import axios from 'axios'
 import { wayfairAuth } from './../secrets'
@@ -40,6 +40,27 @@ export const clearCategory = () => {
   }
 }
 
+export const addModel = (models) => {
+  return {
+    type: ADD_MODEL,
+    models
+  }
+}
+
+export const singleModel = (model) => {
+  return {
+    type: SINGLE_MODEL,
+    selectedModel: model
+  }
+}
+
+export const getSingleModel = () => {
+  return {
+    type: GET_SINGLE_MODEL
+  }
+}
+
+
 // export const loadModelsThunk = () => {
 //   return dispatch => {
 //     console.log('inside loadModelsThunk')
@@ -57,7 +78,7 @@ export const clearCategory = () => {
 export const loadModelsThunk = () => {
   return async dispatch => {
     try {
-      console.log('inside loadModelsThunk')
+      // console.log('inside loadModelsThunk')
       const wayfairUrls = [
         'https://api.wayfair.com/v1/3dapi/models?page=1',
         'https://api.wayfair.com/v1/3dapi/models?page=2',

@@ -13,7 +13,17 @@ class Categories extends React.Component {
         this.state = {
             isVisible: true
         }
+        this.closeOverlay = this.closeOverlay.bind(this)
     }
+
+    closeOverlay() {
+        this.setState({
+            isVisible: false
+        })
+        this.props.navigation.navigate('AR')
+        this.props.clearSingleCategory()
+    }
+
     componentDidMount() {
         this.props.getModels()
     }
@@ -45,8 +55,10 @@ class Categories extends React.Component {
                         this.props.clearSingleCategory()
                     }}
                 >
-                    <Text>category exists!</Text>
-                    <ProductsByCategory category={category} />
+                    {/* <Text>category exists!</Text> */}
+                    <ProductsByCategory
+                        category={category}
+                        closeOverlay={this.closeOverlay} />
 
                 </Overlay>
             )
