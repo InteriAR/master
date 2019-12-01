@@ -67,4 +67,5 @@ export function selectedModelReducer(selectedModel = {}, action) {
   }
 }
 
+
 // export default { dummyReducer, productsReducer }

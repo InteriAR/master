@@ -60,6 +60,7 @@ export const getSingleModel = () => {
   }
 }
 
+
 // export const loadModelsThunk = () => {
 //   return dispatch => {
 //     console.log('inside loadModelsThunk')

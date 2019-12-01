@@ -60,8 +60,8 @@ class AR extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedModel: state.selectedModel
-
+        selectedModel: state.selectedModel,
+        overlay: state.overlay
     }
 }
 

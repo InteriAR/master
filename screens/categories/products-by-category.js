@@ -6,10 +6,15 @@ import { addModel, singleModel } from '../../store/actions'
 // import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
-export function Item({ name, thumbnail, model, sku, selected, handlePress }) {
+
+
+export function Item({ name, thumbnail, model, sku, pageUrl, price, selected, handlePress, closeOverlay }) {
   return (
     <TouchableOpacity
-      onPress={() => handlePress(name, model)}
+      onPress={() => {
+        handlePress(name, model)
+        closeOverlay()
+      }}
       style={[
         styles.item,
         { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
@@ -26,7 +31,8 @@ export function Item({ name, thumbnail, model, sku, selected, handlePress }) {
 
 function ProductsByCategory(props) {
   const category = props.category //an array
-  // console.log('inside productsbycategory', category)
+  const closeOverlay = props.closeOverlay
+  console.log('inside productsbycategory', props)
   // (15)[{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
   const { handlePress } = props
   return (
@@ -39,8 +45,10 @@ function ProductsByCategory(props) {
             thumbnail={item.thumbnail_image_url}
             sku={item.sku}
             model={item.model.glb}
+            pageUrl={item.product_page_url}
+            price={item.sale_price}
             handlePress={handlePress}
-
+            closeOverlay={closeOverlay}
           />)}
         keyExtractor={item => item.sku}
       />
