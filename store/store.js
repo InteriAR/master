@@ -3,13 +3,14 @@ import { createLogger } from 'redux-logger'
 // import thunk from 'redux-thunk'
 import thunkMiddleware from 'redux-thunk'
 
-import { dummyReducer, productsReducer, categoryReducer, modelsReducer } from './reducers'
+import { dummyReducer, productsReducer, categoryReducer, modelsReducer, selectedModelReducer } from './reducers'
 
 const reducer = combineReducers({
   text: dummyReducer,
   products: productsReducer,
   category: categoryReducer,
-  models: modelsReducer
+  models: modelsReducer,
+  selectedModel: selectedModelReducer
 })
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

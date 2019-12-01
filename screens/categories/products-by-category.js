@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Image } from 'react-native'
 // import { sortByClassName, formatProducts } from './../../store/utility-funcs'
-import { addModel } from '../../store/actions'
+import { addModel, singleModel } from '../../store/actions'
 // import { Link } from 'react-router-dom';
 // import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
-export function Item({ name, thumbnail, model, selected, handlePress }) {
+export function Item({ name, thumbnail, model, sku, selected, handlePress }) {
   return (
     <TouchableOpacity
-      onPress={() => handlePress(model)}
+      onPress={() => handlePress(name, model)}
       style={[
         styles.item,
         { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
@@ -37,6 +37,7 @@ function ProductsByCategory(props) {
           <Item
             name={item.product_name}
             thumbnail={item.thumbnail_image_url}
+            sku={item.sku}
             model={item.model.glb}
             handlePress={handlePress}
 
@@ -49,14 +50,16 @@ function ProductsByCategory(props) {
 
 const mapStateToProps = (state) => {
   return {
-    models: state.models
+    models: state.models,
+    selectedModel: state.selectedModel
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    handlePress(model) {
-      dispatch(addModel(model))
+    handlePress(name, glb) {
+      dispatch(addModel(name))
+      dispatch(singleModel(glb))
     }
   }
 }
