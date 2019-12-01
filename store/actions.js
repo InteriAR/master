@@ -64,7 +64,7 @@ export const addModel = (models) => {
 export const loadModelsThunk = () => {
   return async dispatch => {
     try {
-      console.log('inside loadModelsThunk')
+      // console.log('inside loadModelsThunk')
       const wayfairUrls = [
         'https://api.wayfair.com/v1/3dapi/models?page=1',
         'https://api.wayfair.com/v1/3dapi/models?page=2',

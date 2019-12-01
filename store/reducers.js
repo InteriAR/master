@@ -48,7 +48,7 @@ export function categoryReducer(category = [], action) {
 export function modelsReducer(models = [], action) {
   switch (action.type) {
     case ADD_MODEL:
-      console.log('modelsReducer', [...models, action.models])
+      // console.log('modelsReducer', [...models, action.models])
       return [...models, action.models]
     default:
       return models

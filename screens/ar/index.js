@@ -2,15 +2,15 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet, View, TouchableHighlight, Text, Image} from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text, Image } from 'react-native';
 import { withNavigation } from 'react-navigation'
 
 import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroARSceneNavigator,
-  ViroButton,
+    ViroARScene,
+    ViroText,
+    ViroConstants,
+    ViroARSceneNavigator,
+    ViroButton,
 } from 'react-viro';
 
 const initalAR = require('../../js/HelloWorldSceneAR')
@@ -18,10 +18,13 @@ const initalAR = require('../../js/HelloWorldSceneAR')
 export default class AR extends Component {
 
     render() {
-        // console.log(this.props)
+        const propTest = 'propTest'
+        console.log('AR screen index', this.props)
         return (
             <View style={style.main}>
-                <ViroARSceneNavigator initialScene={{scene: initalAR}} />
+                <ViroARSceneNavigator
+                    initialScene={{ scene: initalAR }}
+                    viroAppProps={propTest} />
                 <View style={style.centerItems}>
                     <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>
                         <Image style={style.categoryButton} source={require('../../js/res/button.jpg')} />
@@ -41,7 +44,7 @@ module.exports = withNavigation(AR);
 
 const style = StyleSheet.create({
     main: {
-        flex: 1, 
+        flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-end'
     },
@@ -64,6 +67,6 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'absolute'           
+        position: 'absolute'
     }
 })
