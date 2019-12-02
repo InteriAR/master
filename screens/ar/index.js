@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableHighlight, Text, Image } from 'react-native';
 import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
-import { singleModel, getSingleModel } from '../../store/actions'
+import { getSingleModel, allModels } from '../../store/actions'
 
 import {
     ViroARScene,
@@ -19,7 +19,6 @@ import {
 import HelloWorldSceneAR from '../../js/HelloWorldSceneAR'
 const initalAR = HelloWorldSceneAR
 
-const propTest = 'propTest'
 
 class AR extends Component {
     // constructor() {
@@ -30,18 +29,18 @@ class AR extends Component {
     // }
     componentDidMount() {
         this.props.getSelectedModel()
+        this.props.getAllModels()
         // this.setState({ viroAppProps: { selectedModel: this.props.selectedModel } })
     }
 
     render() {
-        // console.log('AR screen index', this.props)
+        console.log('AR screen index models', this.props.models)
         const selectedModel = this.props.selectedModel
         console.log('AR screen selected model', selectedModel)
         return (
             <View style={style.main}>
                 <ViroARSceneNavigator
                     initialScene={{ scene: initalAR }}
-                    // viroAppProps={this.state.viroAppProps}
                     viroAppProps={{ selectedModel }} />
                 <View style={style.centerItems}>
                     <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>
@@ -60,14 +59,15 @@ class AR extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedModel: state.selectedModel,
-        overlay: state.overlay
+        models: state.models,
+        selectedModel: state.selectedModel
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getSelectedModel: () => dispatch(getSingleModel())
+        getSelectedModel: () => dispatch(getSingleModel()),
+        getAllModels: () => dispatch(allModels())
     }
 }
 

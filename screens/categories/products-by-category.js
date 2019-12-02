@@ -2,17 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Image } from 'react-native'
 // import { sortByClassName, formatProducts } from './../../store/utility-funcs'
 import { addModel, singleModel } from '../../store/actions'
-// import { Link } from 'react-router-dom';
-// import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
 
 
 export function Item({ name, thumbnail, model, sku, pageUrl, price, selected, handlePress, closeOverlay }) {
+  const modelToBeSelected = { name, thumbnail, pageUrl, price, sku, model }
   return (
     <TouchableOpacity
       onPress={() => {
-        handlePress(name, model)
+        handlePress(modelToBeSelected)
         closeOverlay()
       }}
       style={[
@@ -65,9 +64,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handlePress(name, glb) {
-      dispatch(addModel(name))
-      dispatch(singleModel(glb))
+    handlePress(model) {
+      dispatch(addModel(model))
+      dispatch(singleModel(model))
     }
   }
 }

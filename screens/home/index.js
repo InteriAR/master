@@ -14,7 +14,6 @@ class Home extends React.Component {
                 <Button
                     title="Menu"
                     onPress={() => {
-
                         this.props.navigation.navigate('AR')
                     }} />
             </View>

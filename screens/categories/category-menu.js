@@ -3,11 +3,10 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Image } from
 import { sortByClassName, formatProducts } from './../../store/utility-funcs'
 import { singleCategory } from '../../store/actions'
 // import { Link } from 'react-router-dom';
-// import { removeStudentThunk } from '../store'
 import { connect } from 'react-redux'
 
 
-export function Item({ category, productList, selected, onSelect, handlePress }) {
+export function Item({ category, productList, selected, handlePress }) {
   return (
     <TouchableOpacity
       onPress={() => handlePress(productList)}
@@ -86,12 +85,6 @@ const mapDispatch = dispatch => {
     }
   }
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     selectCategory: category => dispatch(singleCategory(category))
-//   };
-// }
 
 export default connect(
   mapStateToProps,
