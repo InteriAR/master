@@ -24,6 +24,24 @@ class Home extends React.Component {
             }}
           />
         </View>
+
+        <View>
+          <Button
+            title="Login"
+            onPress={() => {
+              this.props.navigation.navigate("Login");
+            }}
+          />
+        </View>
+
+        <View>
+          <Button
+            title="Sign Up"
+            onPress={() => {
+              this.props.navigation.navigate("SignUp");
+            }}
+          />
+        </View>
       </ImageBackground>
     );
   }
