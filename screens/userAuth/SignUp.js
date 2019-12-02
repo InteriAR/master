@@ -75,7 +75,7 @@ class SignUp extends Component {
             </Item>
 
             <Button
-              style={{ marginTop: 10 }}
+              style={{ marginTop: 10, backgroundColor: "#9f8a61" }}
               full
               rounded
               success

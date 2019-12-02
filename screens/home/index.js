@@ -1,8 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
 import { Button } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
+// import styles from "../../public/styles";
 
 class Home extends React.Component {
   render() {
@@ -11,36 +18,24 @@ class Home extends React.Component {
         style={styles.title}
         source={require("../../public/HomeScreen.jpg")}
       >
-        <View>
-          <Button
-            raised
-            title="Begin Designing"
-            titleStyle={{ color: "#563902" }}
-            buttonStyle={{
-              backgroundColor: "white"
-            }}
-            onPress={() => {
-              this.props.navigation.navigate("AR");
-            }}
-          />
-        </View>
-
-        <View>
-          <Button
-            title="Login"
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
             onPress={() => {
               this.props.navigation.navigate("Login");
             }}
-          />
-        </View>
+          >
+            <Text style={styles.textStyle}> Login </Text>
+          </TouchableOpacity>
 
-        <View>
-          <Button
-            title="Sign Up"
+          <TouchableOpacity
+            style={styles.button}
             onPress={() => {
               this.props.navigation.navigate("SignUp");
             }}
-          />
+          >
+            <Text style={styles.textStyle}> Sign Up </Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );
@@ -55,5 +50,21 @@ const styles = StyleSheet.create({
   title: {
     backgroundColor: "white",
     flex: 1
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 10,
+    width: 100,
+    borderRadius: 20
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 250
+  },
+  textStyle: {
+    color: "#9f8a61"
   }
 });

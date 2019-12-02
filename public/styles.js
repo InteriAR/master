@@ -1,6 +1,6 @@
 const styles = {
   title: {
-    backgroundColor: "#9f8a61",
+    // backgroundColor: "#563902",
     flex: 1
   },
   logSignBtn: {
@@ -12,15 +12,20 @@ const styles = {
     color: "white"
   },
   loginPage: {
-    justifyContent: "center"
-    // height: 100
-  }
+    justifyContent: "center",
+    height: 100
+  },
 
-  // button: {
-  //   backgroundColor: "#2D898B",
-  //   fontSize: 40,
-  //   fontWeight: "bold"
-  // },
+  inputBox: {
+    width: 300,
+    // height: 50,
+    backgroundColor: "black",
+    borderRadius: 25,
+    paddingHorizontal: 26,
+    fontSize: 22,
+    marginVertical: 20,
+    color: "black"
+  }
 };
 
 export default styles;
