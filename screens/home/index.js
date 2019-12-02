@@ -1,36 +1,41 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
-import { withNavigation } from 'react-navigation'
-import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import { connect } from 'react-redux'
-// import { dummyAction } from '../../store/actions'
+import React from "react";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { Button } from "react-native-elements";
+import { withNavigation } from "react-navigation";
+import { connect } from "react-redux";
 
 class Home extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>InteriAR</Text>
-                {/* <Button title='Menu'  onPress={() => console.log(this)} /> */}
-                <Button
-                    title="Menu"
-                    onPress={() => {
-
-                        this.props.navigation.navigate('AR')
-                    }} />
-            </View>
-        )
-    }
+  render() {
+    return (
+      <ImageBackground
+        style={styles.title}
+        source={require("../../public/HomeScreen.jpg")}
+      >
+        <View>
+          <Button
+            raised
+            title="Begin Designing"
+            titleStyle={{ color: "#563902" }}
+            buttonStyle={{
+              backgroundColor: "white"
+            }}
+            onPress={() => {
+              this.props.navigation.navigate("AR");
+            }}
+          />
+        </View>
+      </ImageBackground>
+    );
+  }
 }
 
 // export default withNavigation(Home)
 
-export default connect(({ dispatch }) => ({ dispatch }))(Home)
+export default connect(({ dispatch }) => ({ dispatch }))(Home);
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})
+  title: {
+    backgroundColor: "white",
+    flex: 1
+  }
+});
