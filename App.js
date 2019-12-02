@@ -7,9 +7,9 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, { Component } from 'react';
-import { Provider } from 'react-redux'
-import store from './store/store'
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import store from "./store/store";
 // import firebase from './firebase'
 import {
   AppRegistry,
@@ -17,34 +17,34 @@ import {
   View,
   StyleSheet,
   PixelRatio,
-  TouchableHighlight,
-} from 'react-native';
+  TouchableHighlight
+} from "react-native";
 
-import {
-  ViroVRSceneNavigator,
-  ViroARSceneNavigator
-} from 'react-viro';
+import { ViroVRSceneNavigator, ViroARSceneNavigator } from "react-viro";
 
-import Navigator from './screens/Navigator'
+import Navigator from "./screens/Navigator";
+import { firebaseConfig } from "./secrets";
+import Home from "./screens/home";
+import Categories from "./screens/categories";
+import AR from "./screens/ar";
+import InsideOverlay from "./screens/categories/inside-overlay";
+import DetailsScreen from "./screens/categories/details-screen";
 
-import Home from './screens/home'
-import Categories from './screens/categories'
-import AR from './screens/ar'
-import InsideOverlay from './screens/categories/inside-overlay'
-import DetailsScreen from './screens/categories/details-screen'
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
+import * as firebase from "firebase";
 
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+firebase.initializeApp(firebaseConfig);
 
 /*
  TODO: Insert your API key below
  */
 var sharedProps = {
-  apiKey: "API_KEY_HERE",
-}
+  apiKey: "API_KEY_HERE"
+};
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require('./js/HelloWorldSceneAR');
-var InitialVRScene = require('./js/HelloWorldScene');
+var InitialARScene = require("./js/HelloWorldSceneAR");
+var InitialVRScene = require("./js/HelloWorldScene");
 
 var UNSET = "UNSET";
 var VR_NAVIGATOR_TYPE = "VR";
@@ -59,15 +59,17 @@ export default class ViroSample extends Component {
     super();
     this.state = {
       furnitures: []
-    }
+    };
     this.state = {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps
-    }
+    };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
     this._getVRNavigator = this._getVRNavigator.bind(this);
-    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
+      this
+    );
     this._exitViro = this._exitViro.bind(this);
   }
 
@@ -85,7 +87,6 @@ export default class ViroSample extends Component {
 
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
-
     return (
       // <View style={localStyles.outer} >
       //   <View style={localStyles.inner} >
@@ -113,7 +114,6 @@ export default class ViroSample extends Component {
       <Provider store={store}>
         <Navigator />
       </Provider>
-
     );
   }
   // _getHomeNavigator() {
@@ -126,7 +126,8 @@ export default class ViroSample extends Component {
     return (
       <ViroARSceneNavigator
         {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }} />
+        initialScene={{ scene: InitialARScene }}
+      />
     );
   }
 
@@ -135,7 +136,9 @@ export default class ViroSample extends Component {
     return (
       <ViroVRSceneNavigator
         {...this.state.sharedProps}
-        initialScene={{ scene: InitialVRScene }} onExitViro={this._exitViro} />
+        initialScene={{ scene: InitialVRScene }}
+        onExitViro={this._exitViro}
+      />
     );
   }
 
@@ -145,15 +148,15 @@ export default class ViroSample extends Component {
     return () => {
       this.setState({
         navigatorType: navigatorType
-      })
-    }
+      });
+    };
   }
 
   // This function "exits" Viro by setting the navigatorType to UNSET.
   _exitViro() {
     this.setState({
       navigatorType: UNSET
-    })
+    });
   }
 }
 
@@ -176,30 +179,30 @@ export default class ViroSample extends Component {
 var localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   outer: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: "black",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "black"
   },
   inner: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: "black",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "black"
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
     fontSize: 25
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
     fontSize: 20
   },
   buttons: {
@@ -209,10 +212,10 @@ var localStyles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#68a0cf',
+    backgroundColor: "#68a0cf",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff"
   },
   exitButton: {
     height: 50,
@@ -221,11 +224,11 @@ var localStyles = StyleSheet.create({
     paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#68a0cf',
+    backgroundColor: "#68a0cf",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff"
   }
 });
 
-module.exports = ViroSample
+module.exports = ViroSample;
