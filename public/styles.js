@@ -1,7 +1,23 @@
 const styles = {
   title: {
-    // backgroundColor: "#563902",
+    backgroundColor: "white",
     flex: 1
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 10,
+    width: 100,
+    borderRadius: 20
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 250
+  },
+  textStyle: {
+    color: "#9f8a61"
   },
   logSignBtn: {
     flex: 1,
@@ -15,16 +31,29 @@ const styles = {
     justifyContent: "center",
     height: 100
   },
-
-  inputBox: {
-    width: 300,
-    // height: 50,
-    backgroundColor: "black",
-    borderRadius: 25,
-    paddingHorizontal: 26,
-    fontSize: 22,
-    marginVertical: 20,
-    color: "black"
+  profileButton: {
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginBottom: 20,
+    width: 200,
+    padding: 10
+  },
+  profileTextStyle: {
+    color: "#54320d",
+    textAlign: "center",
+    fontSize: 60,
+    padding: 50,
+    fontFamily: "georgia"
+  },
+  profileButtonContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30
+  },
+  profileButtonText: {
+    color: "#54320d"
   }
 };
 
