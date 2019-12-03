@@ -32,12 +32,13 @@ class AR extends Component {
     render() {
         console.log('AR screen index models', this.props.models)
         const selectedModel = this.props.selectedModel
+        const models = this.props.models
         console.log('AR screen selected model', selectedModel)
         return (
             <View style={style.main}>
                 <ViroARSceneNavigator
                     initialScene={{ scene: SceneAR }}
-                    viroAppProps={{ selectedModel }} />
+                    viroAppProps={{ selectedModel, models }} />
                 <View style={style.centerItems}>
                     <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>
                         <Image style={style.categoryButton} source={require('../../js/res/button.jpg')} />

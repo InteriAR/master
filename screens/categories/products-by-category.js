@@ -15,7 +15,7 @@ export function Item({ name, thumbnail, glb, sku, pageUrl, price, selected, hand
     sku,
     glb,
     selected: false,
-    scale: [0.1, 0.1, 0.1],
+    scale: [0.5, 0.5, 0.5],
     position: [0, 0, -1],
     rotation: [0, 0, 0],
     type: "GLB",
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     handlePress(model) {
-      // dispatch(addModel(model))
+      dispatch(addModel(model))
       dispatch(singleModel(model))
     }
   }

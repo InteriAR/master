@@ -50,7 +50,7 @@ class SingleModel extends Component {
 
         <Viro3DObject
           source={{ uri: product.glb }}
-          type={product.type}
+          type="GLB"
           scale={product.scale}
           position={product.position}
           rotation={product.rotation}

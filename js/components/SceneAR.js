@@ -20,7 +20,13 @@ import {
 
 import SingleModel from './singleModelRender'
 import testModel from './test-models'
+import { selectedModelReducer } from '../../store/reducers';
 
+// let state = {
+//   text: "Initializing AR...",
+//   modelsRendered: [],
+//   selectedModel: {}
+// };
 
 class SceneAR extends Component {
 
@@ -31,38 +37,83 @@ class SceneAR extends Component {
     this.state = {
       text: "Initializing AR..."
     };
+    // this.state = state
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this.renderModels = this.renderModels.bind(this)
+    this.renderSelectedModel = this.renderSelectedModel.bind(this)
   }
+
+  // componentDidMount() {
+  //   console.log('inside component did mount', this.props)
+  //   const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
+  //   let modelToRender = this.renderSelectedModel(selectedModel)
+  //   this.setState(prevState => ({
+  //     modelsRendered: [...prevState.modelsRendered, modelToRender],
+  //     selectedModel: modelToRender
+  //   }))
+  //   console.log('this.state', this.state)
+  // }
+
+  // componentWillUnmount() {
+  //   // Remember state for the next mount
+  //   state = this.state;
+  // }
 
   render() {
     console.log('inside SceneAR', this.props)
+
     const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
-    let modelToRender = this.renderSelectedModel(selectedModel)
+    // const models = this.props.arSceneNavigator.viroAppProps.selectedModel
     console.log('sceneAR inside render', selectedModel)
-    // let models = this.renderModels()
-    // console.log('sceneAR inside render', models)
-    return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
 
-        <ViroAmbientLight color="#ffffff" />
+    if (selectedModel.sku === undefined) {
+      return (
+        <ViroARScene onTrackingUpdated={this._onInitialized} >
 
-        <ViroSpotLight
-          innerAngle={5}
-          outerAngle={90}
-          direction={[0, 1, 0]}
-          position={[0, -7, 0]}
-          color="#ffffff"
-          intensity={250} />
+          <ViroAmbientLight color="#ffffff" />
 
-        <ViroARPlaneSelector onPlaneSelected={() => console.log('planeselected')}>
-          {modelToRender}
-        </ViroARPlaneSelector>
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={90}
+            direction={[0, 1, 0]}
+            position={[0, -7, 0]}
+            color="#ffffff"
+            intensity={250} />
 
-      </ViroARScene >
-    );
+
+        </ViroARScene >
+      );
+    } else {
+      console.log('else sceneAR inside render', this.state, this.props)
+      const prevModels = this.props.arSceneNavigator.viroAppProps.models
+      let models = this.renderModels(prevModels)
+
+      let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
+      // console.log('sceneAR inside render', models)
+      return (
+        <ViroARScene onTrackingUpdated={this._onInitialized} >
+
+          <ViroAmbientLight color="#ffffff" />
+
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={90}
+            direction={[0, 1, 0]}
+            position={[0, -7, 0]}
+            color="#ffffff"
+            intensity={250} />
+
+          <ViroARPlaneSelector onPlaneSelected={() => console.log('planeselected')}>
+            {modelToRender}
+            {models}
+          </ViroARPlaneSelector>
+
+        </ViroARScene >
+      );
+
+    }
   }
 
   _onInitialized(state, reason) {
@@ -80,16 +131,15 @@ class SceneAR extends Component {
     return renderedSelectedModel
   }
 
-  renderModels() {
+  renderModels(prevModels) {
     let renderedModels = []
-
-    if (testModel) {
+    if (prevModels) {
       const root = this
-      testModel.forEach(function (currProduct) {
+      prevModels.forEach(function (product) {
         renderedModels.push(
           <SingleModel
-            key={currProduct.name}
-            testModel={currProduct}
+            key={product.sku}
+            product={product}
           // hitTestMethod={root._performARHitTest} //would like to get this to work
           />
         )
