@@ -19,10 +19,12 @@ class SingleModel extends Component {
     super();
 
     this.state = {
-      rotation: [0, 0, 0]
+      rotation: [0, 0, 0],
+      lastClick: 0
     };
 
     this._onRotate = this._onRotate.bind(this);
+    this._onClick = this._onClick.bind(this);
     this.logPosition = this.logPosition.bind(this);
   }
 
@@ -54,12 +56,12 @@ class SingleModel extends Component {
 
 
         <Viro3DObject
-          rel={component => this._viro3DObject = component}
           source={{ uri: product.glb }}
           type="GLB"
           scale={[1.3, 1.3, 1.3]}
           position={product.position}
           rotation={this.state.rotation}
+          onClick = {this._onClick}
           onRotate = {this._onRotate}
         />
 
@@ -69,6 +71,18 @@ class SingleModel extends Component {
 
 
     )
+  }
+
+  _onClick(position, source) {
+    const clickedAt = new Date;
+
+    if (clickedAt - this.state.lastClick < 1000) {
+      console.log('double click detected');
+    }
+
+    this.setState({
+      lastClick: clickedAt
+    });
   }
 
   _onRotate(rotateState, rotationFactor, source) {
