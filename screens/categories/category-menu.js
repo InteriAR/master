@@ -13,13 +13,8 @@ import { Button } from "react-native-elements";
 import { sortByClassName, formatProducts } from "./../../store/utility-funcs";
 import { singleCategory } from "../../store/actions";
 import { connect } from "react-redux";
-
-export function Item({
-  category,
-  productList,
-  selected,
-  handlePress
-}) {
+import styles from "../../public/styles";
+export function Item({ category, productList, selected, handlePress }) {
   return (
     <Button
       title={category}
@@ -30,9 +25,6 @@ export function Item({
         { backgroundColor: selected ? "#6e3b6e" : "#f9c2ff" }
       ]}
     />
-    // <Text style={styles.title}>{category}</Text>
-    // {/* <Text style={styles.title}>{productList}</Text> */}
-    // {/* </TouchableOpacity> */}
   );
 }
 
@@ -61,8 +53,8 @@ function CategoryMenu(props) {
               category={item.category}
               productList={item.productList}
               handlePress={handlePress}
-            // selected={!!selected.get(item.category)}
-            // onSelect={onSelect}
+              // selected={!!selected.get(item.category)}
+              // onSelect={onSelect}
             />
           )}
           keyExtractor={item => item.category}
@@ -86,28 +78,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatch
-)(CategoryMenu);
-
-// export default CategoryMenu;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  item: {
-    marginVertical: 20,
-    marginHorizontal: 8
-  },
-  title: {
-    fontSize: 32,
-    color: "white",
-    backgroundColor: "#9f8a61"
-  },
-  loading: {
-    fontSize: 40,
-    color: "#563902"
-  }
-});
+export default connect(mapStateToProps, mapDispatch)(CategoryMenu);

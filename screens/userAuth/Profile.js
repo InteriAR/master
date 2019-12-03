@@ -68,27 +68,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-// const styles = StyleSheet.create({
-//   title: {
-//     backgroundColor: "white",
-//     flex: 1
-//   },
-//   button: {
-//     alignItems: "center",
-//     backgroundColor: "#f8a961",
-//     // padding: 10,
-//     width: 100
-//     // borderRadius: 20
-//   },
-//   buttonContainer: {
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 250
-//   },
-//   textStyle: {
-//     color: "white",
-//     fontSize: 50
-//   }
-// });

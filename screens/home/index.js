@@ -42,29 +42,4 @@ class Home extends React.Component {
   }
 }
 
-// export default withNavigation(Home)
-
 export default connect(({ dispatch }) => ({ dispatch }))(Home);
-
-// const styles = StyleSheet.create({
-//   title: {
-//     backgroundColor: "white",
-//     flex: 1
-//   },
-//   button: {
-//     alignItems: "center",
-//     backgroundColor: "white",
-//     padding: 10,
-//     width: 100,
-//     borderRadius: 20
-//   },
-//   buttonContainer: {
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 250
-//   },
-//   textStyle: {
-//     color: "#9f8a61"
-//   }
-// });

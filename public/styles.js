@@ -54,6 +54,39 @@ const styles = {
   },
   profileButtonText: {
     color: "#54320d"
+  },
+  container: {
+    flex: 1
+  },
+  item: {
+    marginVertical: 20,
+    marginHorizontal: 8,
+    borderRadius: 20
+  },
+  categoryTitle: {
+    fontSize: 32,
+    color: "white",
+    backgroundColor: "#9f8a61"
+  },
+  loading: {
+    fontSize: 40,
+    color: "#563902"
+  },
+  singleProduct: {
+    width: 150,
+    height: 150
+  },
+  singleProductTitle: {
+    fontSize: 20,
+    color: "#563902",
+    textAlign: "center"
+  },
+  singleProductItem: {
+    backgroundColor: "white",
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 10,
+    alignItems: "center"
   }
 };
 
