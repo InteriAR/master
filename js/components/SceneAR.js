@@ -106,7 +106,7 @@ class SceneAR extends Component {
             intensity={250} />
 
           <ViroARPlaneSelector onPlaneSelected={() => console.log('planeselected')}>
-            {modelToRender}
+            {/* {modelToRender} */}
             {models}
           </ViroARPlaneSelector>
 
