@@ -18,12 +18,17 @@ class SingleModel extends Component {
   constructor() {
     super();
 
-    this.logPosition = this.logPosition.bind(this)
+    this.state = {
+      rotation: [0, 0, 0]
+    };
+
+    this._onRotate = this._onRotate.bind(this);
+    this.logPosition = this.logPosition.bind(this);
   }
 
   render() {
     // this.logPosition()
-    const product = this.props.product
+    const product = this.props.product;
     return (
 
       <ViroNode
@@ -49,11 +54,13 @@ class SingleModel extends Component {
 
 
         <Viro3DObject
+          rel={component => this._viro3DObject = component}
           source={{ uri: product.glb }}
           type="GLB"
-          scale={product.scale}
+          scale={[1.3, 1.3, 1.3]}
           position={product.position}
-          rotation={product.rotation}
+          rotation={this.state.rotation}
+          onRotate = {this._onRotate}
         />
 
         <ViroAmbientLight color="#ffffff" />
@@ -64,13 +71,33 @@ class SingleModel extends Component {
     )
   }
 
-  logPosition() {
-    //ask andy to show how to "bind" position[x,y,z]
-    console.log('log position', product.position)
+  _onRotate(rotateState, rotationFactor, source) {
+    console.log('before:', this.state.rotation[1]);
+    if (rotateState === 2) {
+      console.log('rotation state', rotateState, 'triggered');
+      let yRot = this.state.rotation[1];
+      let rot;
+
+      yRot += rotationFactor / 10;
+      if (yRot >= 360) {
+        yRot -= 360;
+      } else if (yRot < 0) {
+        yRot += 360;
+      }
+
+      rot = { rotation: [0, yRot, 0] };
+
+      this.setState(rot);
+    }
+
+    console.log('after:', this.state.rotation[1]);
   }
 
-
+  logPosition() {
+    //ask andy to show how to "bind" position[x,y,z]
+    console.log('log position', product.position);
+  }
 }
 
 
-export default SingleModel
+export default SingleModel;
