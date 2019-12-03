@@ -8,7 +8,7 @@
  */
 
 import React, { Component } from 'react';
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import store from './store/store'
 // import firebase from './firebase'
 import {
@@ -18,6 +18,7 @@ import {
   StyleSheet,
   PixelRatio,
   TouchableHighlight,
+  Button
 } from 'react-native';
 
 import {
@@ -26,7 +27,7 @@ import {
 } from 'react-viro';
 
 import Navigator from './screens/Navigator'
-
+import { getUsersCollection } from "./store/actions"
 import Home from './screens/home'
 import Categories from './screens/categories'
 import AR from './screens/ar'
@@ -54,7 +55,7 @@ var AR_NAVIGATOR_TYPE = "AR";
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
 var defaultNavigatorType = UNSET;
 
-export default class ViroSample extends Component {
+class ViroSample extends Component {
   constructor() {
     super();
     this.state = {
@@ -157,6 +158,19 @@ export default class ViroSample extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.collection
+  }
+}
+
+const mapDispatchToProps = disptach => {
+  return {
+    getUsersCollection: () => disptach(getUsersCollection)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViroSample)
 // const Navigator = createAppContainer(createSwitchNavigator(
 //   {
 //     Home: { screen: props => <Home {...props} /> },
@@ -172,6 +186,7 @@ export default class ViroSample extends Component {
 // ))
 
 // const AppNavigator = createAppContainer(Navigator)
+
 
 var localStyles = StyleSheet.create({
   viroContainer: {

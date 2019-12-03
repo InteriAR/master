@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, SAVE_USER_COLLECTION } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -67,5 +67,13 @@ export function selectedModelReducer(selectedModel = {}, action) {
   }
 }
 
+export function userReducer(collection = {}, action) {
+  switch (action.type) {
+    case SAVE_USER_COLLECTION:
+      return {...collection, ...action.collection}
+    default:
+      return collection
+  }
+}
 
 // export default { dummyReducer, productsReducer }

@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, SAVE_USER_COLLECTION } from './action-type'
 import { sortByClassName, formatProducts } from './utility-funcs.js'
 import axios from 'axios'
 import { wayfairAuth } from './../secrets'
@@ -60,7 +60,12 @@ export const getSingleModel = () => {
   }
 }
 
-
+export const getUsersCollection = (collection) => {
+  return {
+    type: SAVE_USER_COLLECTION,
+    collection
+  }
+}
 // export const loadModelsThunk = () => {
 //   return dispatch => {
 //     console.log('inside loadModelsThunk')
