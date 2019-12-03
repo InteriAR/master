@@ -33,7 +33,16 @@ class SignUp extends Component {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(this.props.navigation.navigate("Profile"));
+        .then(() => {
+          const userUid = auth.currentUser.uid;
+          console.log("USER ID=====>", userUid);
+          const db = firebase.firestore();
+          return db
+            .collection("users")
+            .doc(userUid)
+            .set({ email, password });
+        });
+      // .then(this.props.navigation.navigate("Profile"));
     } catch (error) {
       console.log(error.toString());
     }
