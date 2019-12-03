@@ -12,15 +12,12 @@ import { Button } from "react-native-elements";
 
 import { sortByClassName, formatProducts } from "./../../store/utility-funcs";
 import { singleCategory } from "../../store/actions";
-// import { Link } from 'react-router-dom';
-// import { removeStudentThunk } from '../store'
 import { connect } from "react-redux";
 
 export function Item({
   category,
   productList,
   selected,
-  onSelect,
   handlePress
 }) {
   return (
@@ -28,8 +25,6 @@ export function Item({
       title={category}
       buttonStyle={{ backgroundColor: "#9f8a61" }}
       onPress={() => handlePress(productList)}
-      // onPress={() => Alert.alert('Simple Button pressed')}
-      // onPress={() => onSelect(category)}
       style={[
         styles.item,
         { backgroundColor: selected ? "#6e3b6e" : "#f9c2ff" }
@@ -50,18 +45,6 @@ function CategoryMenu(props) {
   // console.log('categories', categories)
   const { handlePress } = props;
 
-  // const [selected, setSelected] = React.useState(new Map());
-
-  // const onSelect = React.useCallback(
-  //   category => {
-  //     const newSelected = new Map(selected);
-  //     newSelected.set(category, !selected.get(category));
-
-  //     setSelected(newSelected);
-  //   },
-  //   [selected],
-  // );
-
   if (formattedProducts.length === 0) {
     return (
       <View style={styles.container}>
@@ -78,8 +61,8 @@ function CategoryMenu(props) {
               category={item.category}
               productList={item.productList}
               handlePress={handlePress}
-              // selected={!!selected.get(item.category)}
-              // onSelect={onSelect}
+            // selected={!!selected.get(item.category)}
+            // onSelect={onSelect}
             />
           )}
           keyExtractor={item => item.category}
@@ -103,13 +86,10 @@ const mapDispatch = dispatch => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     selectCategory: category => dispatch(singleCategory(category))
-//   };
-// }
-
-export default connect(mapStateToProps, mapDispatch)(CategoryMenu);
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(CategoryMenu);
 
 // export default CategoryMenu;
 

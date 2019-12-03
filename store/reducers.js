@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -49,8 +49,10 @@ export function categoryReducer(category = [], action) {
 export function modelsReducer(models = [], action) {
   switch (action.type) {
     case ADD_MODEL:
-      // console.log('modelsReducer', [...models, action.models])
+      console.log('modelsReducer', [...models, action.models])
       return [...models, action.models]
+    case ALL_MODELS:
+      return models
     default:
       return models
   }

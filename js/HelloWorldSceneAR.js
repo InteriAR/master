@@ -34,8 +34,8 @@ class HelloWorldSceneAR extends Component {
 
   render() {
     console.log('props inside helloAR', this.props)
-    const currModel = this.props.arSceneNavigator.viroAppProps.selectedModel
-    console.log('currModel', currModel)
+    const currModelGlb = this.props.arSceneNavigator.viroAppProps.selectedModel.model
+    console.log('currModel', currModelGlb)
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         <ViroARPlaneSelector
@@ -60,7 +60,7 @@ class HelloWorldSceneAR extends Component {
             <ViroAmbientLight color="#ffffff" />
 
             <Viro3DObject
-              source={{ uri: currModel }}
+              source={{ uri: currModelGlb }}
               type="GLB"
               scale={[1.3, 1.3, 1.3]}
               position={[0, 0, -1]}

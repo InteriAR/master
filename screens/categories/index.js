@@ -1,9 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
-import axios from 'axios'
 import { Overlay } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { dummyAction, loadModels, loadModelsThunk, singleCategory, clearCategory } from '../../store/actions'
+import { loadModelsThunk, clearCategory } from '../../store/actions'
 import CategoryMenu from './category-menu'
 import ProductsByCategory from './products-by-category'
 
@@ -37,6 +36,7 @@ class Categories extends React.Component {
             return (
                 <Overlay
                     isVisible={this.state.isVisible}
+                    transparent={true}
                     onBackdropPress={() => {
                         this.setState({ isVisible: false })
                         this.props.navigation.navigate('AR')
@@ -49,6 +49,7 @@ class Categories extends React.Component {
             return (
                 <Overlay
                     isVisible={this.state.isVisible}
+                    transparent={true}
                     onBackdropPress={() => {
                         this.setState({ isVisible: false })
                         this.props.navigation.navigate('AR')
