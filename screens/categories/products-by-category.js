@@ -10,15 +10,14 @@ import {
 } from "react-native";
 // import { sortByClassName, formatProducts } from './../../store/utility-funcs'
 import { addModel, singleModel } from "../../store/actions";
-// import { Link } from 'react-router-dom';
-// import { removeStudentThunk } from '../store'
 import { connect } from "react-redux";
 import { Button } from "react-native-elements";
+import styles from "../../public/styles";
 
 export function Item({
   name,
   thumbnail,
-  model,
+  glb,
   sku,
   pageUrl,
   price,
@@ -26,16 +25,38 @@ export function Item({
   handlePress,
   closeOverlay
 }) {
+  const modelToBeSelected = {
+    name,
+    thumbnail,
+    pageUrl,
+    price,
+    sku,
+    glb,
+    selected: false,
+    scale: [0.5, 0.5, 0.5],
+    position: [0, 0, -1],
+    rotation: [0, 0, 0],
+    type: "GLB",
+    physics: undefined,
+    ref_pointer: undefined,
+    shadow_width: 3.5,
+    shadow_height: 3,
+    spotlight_position_y: 9.2
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {
-        handlePress(name, model);
+        handlePress(modelToBeSelected);
         closeOverlay();
       }}
-      style={[styles.item, { backgroundColor: selected ? "#6e3b6e" : "white" }]}
+      style={[
+        styles.singleProductItem,
+        { backgroundColor: selected ? "#6e3b6e" : "white" }
+      ]}
     >
-      <Text style={styles.title}>{name}</Text>
-      <Image style={{ width: 150, height: 150 }} source={{ uri: thumbnail }} />
+      <Text style={styles.singleProductTitle}>{name}</Text>
+      <Image style={styles.singleProduct} source={{ uri: thumbnail }} />
     </TouchableOpacity>
   );
 }
@@ -55,7 +76,7 @@ function ProductsByCategory(props) {
             name={item.product_name}
             thumbnail={item.thumbnail_image_url}
             sku={item.sku}
-            model={item.model.glb}
+            glb={item.model.glb}
             pageUrl={item.product_page_url}
             price={item.sale_price}
             handlePress={handlePress}
@@ -77,33 +98,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handlePress(name, glb) {
-      dispatch(addModel(name));
-      dispatch(singleModel(glb));
+    handlePress(model) {
+      dispatch(addModel(model));
+      dispatch(singleModel(model));
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsByCategory);
-
-// export default ProductsByCategory
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  item: {
-    backgroundColor: "white",
-    padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 10
-  },
-  title: {
-    fontSize: 20,
-    color: "#563902"
-  },
-  loading: {
-    fontSize: 40,
-    color: "#563902"
-  }
-});
