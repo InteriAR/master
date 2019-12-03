@@ -22,31 +22,32 @@ import {
 } from "react-viro";
 
 // const initalAR = require('../../js/HelloWorldSceneAR')
-import HelloWorldSceneAR from '../../js/HelloWorldSceneAR'
-const initalAR = HelloWorldSceneAR
-import SceneAR from '../../js/components/SceneAR'
-
+import HelloWorldSceneAR from "../../js/HelloWorldSceneAR";
+const initalAR = HelloWorldSceneAR;
+import SceneAR from "../../js/components/SceneAR";
 
 class AR extends Component {
-
   componentDidMount() {
-    this.props.getSelectedModel()
-    this.props.getAllModels()
+    this.props.getSelectedModel();
+    this.props.getAllModels();
     // this.setState({ viroAppProps: { selectedModel: this.props.selectedModel } })
   }
 
   render() {
-    console.log('AR screen index models', this.props.models)
-    const selectedModel = this.props.selectedModel
-    const models = this.props.models
-    console.log('AR screen selected model', selectedModel)
+    console.log("AR screen index models", this.props.models);
+    const selectedModel = this.props.selectedModel;
+    const models = this.props.models;
+    console.log("AR screen selected model", selectedModel);
     return (
       <View style={style.main}>
         <ViroARSceneNavigator
           initialScene={{ scene: SceneAR }}
-          viroAppProps={{ selectedModel, models }} />
+          viroAppProps={{ selectedModel, models }}
+        />
         <View style={style.centerItems}>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>
+          <TouchableHighlight
+            onPress={() => this.props.navigation.navigate("Categories")}
+          >
             <Image
               style={style.categoryButton}
               source={require("../../js/res/AddFurniture.jpg")}
@@ -63,25 +64,21 @@ class AR extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     models: state.models,
     selectedModel: state.selectedModel
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     getSelectedModel: () => dispatch(getSingleModel()),
     getAllModels: () => dispatch(allModels())
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AR));
-
-// module.exports = withNavigation(AR);
-
-// export default withNavigation(AR)
 
 const style = StyleSheet.create({
   main: {
