@@ -18,15 +18,11 @@ import {
 // const initalAR = require('../../js/HelloWorldSceneAR')
 import HelloWorldSceneAR from '../../js/HelloWorldSceneAR'
 const initalAR = HelloWorldSceneAR
+import SceneAR from '../../js/components/SceneAR'
 
 
 class AR extends Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         viroAppProps: { selectedModel: {} },
-    //     }
-    // }
+
     componentDidMount() {
         this.props.getSelectedModel()
         this.props.getAllModels()
@@ -40,7 +36,7 @@ class AR extends Component {
         return (
             <View style={style.main}>
                 <ViroARSceneNavigator
-                    initialScene={{ scene: initalAR }}
+                    initialScene={{ scene: SceneAR }}
                     viroAppProps={{ selectedModel }} />
                 <View style={style.centerItems}>
                     <TouchableHighlight onPress={() => this.props.navigation.navigate('Categories')}>

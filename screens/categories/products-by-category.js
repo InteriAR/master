@@ -6,25 +6,45 @@ import { connect } from 'react-redux'
 
 
 
-export function Item({ name, thumbnail, model, sku, pageUrl, price, selected, handlePress, closeOverlay }) {
-  const modelToBeSelected = { name, thumbnail, pageUrl, price, sku, model }
+export function Item({ name, thumbnail, glb, sku, pageUrl, price, selected, handlePress, closeOverlay }) {
+  const modelToBeSelected = {
+    name,
+    thumbnail,
+    pageUrl,
+    price,
+    sku,
+    glb,
+    selected: false,
+    scale: [0.1, 0.1, 0.1],
+    position: [0, 0, -1],
+    rotation: [0, 0, 0],
+    type: "GLB",
+    physics: undefined,
+    ref_pointer: undefined,
+    shadow_width: 3.5,
+    shadow_height: 3,
+    spotlight_position_y: 9.2
+  }
+
   return (
     <TouchableOpacity
       onPress={() => {
         handlePress(modelToBeSelected)
         closeOverlay()
-      }}
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
-      ]}
+      }
+      }
+      style={
+        [
+          styles.item,
+          { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
+        ]}
     >
       <Text style={styles.title}>{name}</Text>
       <Image
         style={{ width: 150, height: 150 }}
         source={{ uri: thumbnail }}
       />
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 }
 
@@ -43,7 +63,7 @@ function ProductsByCategory(props) {
             name={item.product_name}
             thumbnail={item.thumbnail_image_url}
             sku={item.sku}
-            model={item.model.glb}
+            glb={item.model.glb}
             pageUrl={item.product_page_url}
             price={item.sale_price}
             handlePress={handlePress}
@@ -65,7 +85,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     handlePress(model) {
-      dispatch(addModel(model))
+      // dispatch(addModel(model))
       dispatch(singleModel(model))
     }
   }
