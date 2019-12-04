@@ -33,7 +33,7 @@ import DetailsScreen from "./screens/categories/details-screen";
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import * as firebase from "firebase";
 
-firebase.initializeApp(firebaseConfig).firestore;
+firebase.initializeApp(firebaseConfig);
 
 /*
  TODO: Insert your API key below
