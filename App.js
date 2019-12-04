@@ -26,7 +26,7 @@ import Navigator from "./screens/Navigator";
 import { firebaseConfig } from "./secrets";
 import * as firebase from "firebase";
 
-firebase.initializeApp(firebaseConfig).firestore;
+firebase.initializeApp(firebaseConfig);
 
 /*
  TODO: Insert your API key below
