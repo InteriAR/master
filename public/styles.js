@@ -87,6 +87,20 @@ const styles = {
     marginVertical: 8,
     marginHorizontal: 10,
     alignItems: "center"
+  },
+  savedCollectionsTextStyle: {
+    color: "#54320d",
+    textAlign: "center",
+    fontSize: 30,
+    padding: 20,
+    marginTop: 50,
+    fontFamily: "georgia"
+  },
+  savedCollectionsTextContainer: {
+    flex: 1,
+    width: 300,
+    flexDirection: "column",
+    marginHorizontal: 60
   }
 };
 
