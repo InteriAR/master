@@ -22,8 +22,8 @@ import {
 } from "react-viro";
 
 // const initalAR = require('../../js/HelloWorldSceneAR')
-import HelloWorldSceneAR from "../../js/HelloWorldSceneAR";
-const initalAR = HelloWorldSceneAR;
+// import HelloWorldSceneAR from "../../js/HelloWorldSceneAR";
+// const initalAR = HelloWorldSceneAR;
 import SceneAR from "../../js/components/SceneAR";
 
 class AR extends Component {
