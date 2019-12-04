@@ -9,11 +9,13 @@ import {
   Image
 } from "react-native";
 import { Button } from "react-native-elements";
-
+import ClearButton from './clear-button'
 import { sortByClassName, formatProducts } from "./../../store/utility-funcs";
 import { singleCategory } from "../../store/actions";
+
 import { connect } from "react-redux";
 import styles from "../../public/styles";
+
 export function Item({ category, productList, selected, handlePress }) {
   return (
     <Button
@@ -46,6 +48,7 @@ function CategoryMenu(props) {
   } else {
     return (
       <View style={styles.container}>
+        <ClearButton />
         <FlatList
           data={formattedProducts}
           renderItem={({ item }) => (
@@ -53,8 +56,8 @@ function CategoryMenu(props) {
               category={item.category}
               productList={item.productList}
               handlePress={handlePress}
-              // selected={!!selected.get(item.category)}
-              // onSelect={onSelect}
+            // selected={!!selected.get(item.category)}
+            // onSelect={onSelect}
             />
           )}
           keyExtractor={item => item.category}

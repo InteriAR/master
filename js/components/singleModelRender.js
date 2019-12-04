@@ -11,9 +11,6 @@ import {
   ViroARPlaneSelector
 } from 'react-viro';
 
-// import product from './test-models'
-
-
 class SingleModel extends Component {
   constructor() {
     super();
@@ -58,11 +55,13 @@ class SingleModel extends Component {
         <Viro3DObject
           source={{ uri: product.glb }}
           type="GLB"
-          scale={[1.3, 1.3, 1.3]}
+          scale={[1, 1, 1]}
           position={product.position}
           rotation={this.state.rotation}
+
           onClick = {this._onClick}
           onRotate = {this._onRotate}
+
         />
 
         <ViroAmbientLight color="#ffffff" />
@@ -86,7 +85,7 @@ class SingleModel extends Component {
   }
 
   _onRotate(rotateState, rotationFactor, source) {
-    console.log('before:', this.state.rotation[1]);
+    // console.log('before:', this.state.rotation[1]);
     if (rotateState === 2) {
       console.log('rotation state', rotateState, 'triggered');
       let yRot = this.state.rotation[1];
@@ -104,7 +103,7 @@ class SingleModel extends Component {
       this.setState(rot);
     }
 
-    console.log('after:', this.state.rotation[1]);
+    // console.log('after:', this.state.rotation[1]);
   }
 
   logPosition() {
