@@ -11,19 +11,28 @@ import {
   ViroARPlaneSelector
 } from 'react-viro';
 
+
+import { connect } from "react-redux";
+import { removeModel } from '../../store/actions'
+
 class SingleModel extends Component {
   constructor() {
     super();
 
     this.state = {
       rotation: [0, 0, 0],
-      lastClick: 0
+      lastClick: 0,
+      doubleClickCounter: 0
     };
 
     this._onRotate = this._onRotate.bind(this);
     this._onClick = this._onClick.bind(this);
     this.logPosition = this.logPosition.bind(this);
   }
+
+  // componentDidMount() {
+  //   this.props.removeThisModel()
+  // }
 
   render() {
     // this.logPosition()
@@ -59,8 +68,8 @@ class SingleModel extends Component {
           position={product.position}
           rotation={this.state.rotation}
 
-          onClick = {this._onClick}
-          onRotate = {this._onRotate}
+          onClick={this._onClick}
+          onRotate={this._onRotate}
 
         />
 
@@ -77,11 +86,20 @@ class SingleModel extends Component {
 
     if (clickedAt - this.state.lastClick < 1000) {
       console.log('double click detected');
+      this.setState({
+        doubleClickCounter: this.state.doubleClickCounter + 1
+      });
     }
-
     this.setState({
       lastClick: clickedAt
     });
+
+    if (this.state.doubleClickCounter === 5) {
+      const modelDoubleClicked = this.props.product
+      console.log('modelDoubleClicked', modelDoubleClicked)
+      this.props.removeThisModel(modelDoubleClicked)
+
+    }
   }
 
   _onRotate(rotateState, rotationFactor, source) {
@@ -112,5 +130,18 @@ class SingleModel extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    models: state.models,
+  };
+};
 
-export default SingleModel;
+const mapDispatchToProps = dispatch => {
+  return {
+    removeThisModel: (model) => dispatch(removeModel(model))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleModel);
+
+// export default SingleModel;

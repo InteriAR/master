@@ -74,7 +74,7 @@ class SceneAR extends Component {
       let models = this.renderModels(prevModels)
 
       // let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
-      // console.log('sceneAR inside render', models)
+      console.log('sceneAR inside render', models)
       return (
         <ViroARScene onTrackingUpdated={this._onInitialized} >
 

@@ -57,6 +57,7 @@ export function modelsReducer(models = [], action) {
       console.log('clear all models!')
       return []
     case REMOVE_MODEL: {
+      console.log('inside remove model', action.model)
       const removedFromList = models.filter(function (model) {
         if (model.sku !== action.model.sku) return model
       })
