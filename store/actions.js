@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL } from './action-type'
 import { sortByClassName, formatProducts } from './utility-funcs.js'
 import axios from 'axios'
 import { wayfairAuth } from './../secrets'
@@ -44,6 +44,13 @@ export const addModel = (models) => {
   return {
     type: ADD_MODEL,
     models
+  }
+}
+
+export const removeModel = (model) => {
+  return {
+    type: REMOVE_MODEL,
+    model
   }
 }
 
