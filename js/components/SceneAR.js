@@ -19,14 +19,6 @@ import {
 } from 'react-viro';
 
 import SingleModel from './singleModelRender'
-import testModel from './test-models'
-import { selectedModelReducer } from '../../store/reducers';
-
-// let state = {
-//   text: "Initializing AR...",
-//   modelsRendered: [],
-//   selectedModel: {}
-// };
 
 class SceneAR extends Component {
 
@@ -37,7 +29,6 @@ class SceneAR extends Component {
     this.state = {
       text: "Initializing AR..."
     };
-    // this.state = state
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
@@ -62,11 +53,11 @@ class SceneAR extends Component {
   // }
 
   render() {
-    console.log('inside SceneAR', this.props)
+    // console.log('inside SceneAR', this.props)
 
     const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
     // const models = this.props.arSceneNavigator.viroAppProps.selectedModel
-    console.log('sceneAR inside render', selectedModel)
+    // console.log('sceneAR inside render', selectedModel)
 
     if (selectedModel.sku === undefined) {
       return (
@@ -90,7 +81,7 @@ class SceneAR extends Component {
       const prevModels = this.props.arSceneNavigator.viroAppProps.models
       let models = this.renderModels(prevModels)
 
-      let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
+      // let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
       // console.log('sceneAR inside render', models)
       return (
         <ViroARScene onTrackingUpdated={this._onInitialized} >
@@ -163,6 +154,5 @@ var styles = StyleSheet.create({
   },
 });
 
-// module.exports = HelloWorldSceneAR;
 
 export default SceneAR

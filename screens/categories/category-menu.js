@@ -9,9 +9,9 @@ import {
   Image
 } from "react-native";
 import { Button } from "react-native-elements";
-import ClearButton from '../../js/components/clear-button'
+import ClearButton from './clear-button'
 import { sortByClassName, formatProducts } from "./../../store/utility-funcs";
-import { singleCategory, clearAllModels } from "../../store/actions";
+import { singleCategory } from "../../store/actions";
 
 import { connect } from "react-redux";
 import styles from "../../public/styles";
@@ -48,7 +48,7 @@ function CategoryMenu(props) {
   } else {
     return (
       <View style={styles.container}>
-        <ClearButton clearAllModels={clearAllModels} />
+        <ClearButton />
         <FlatList
           data={formattedProducts}
           renderItem={({ item }) => (

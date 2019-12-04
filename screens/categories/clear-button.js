@@ -3,19 +3,20 @@ import React from 'react';
 import styles from "../../public/styles";
 import {
   Text,
-  View,
   TouchableOpacity
 } from "react-native";
 
+import { clearAllModels } from "../../store/actions";
+import { connect } from "react-redux";
+
 
 function ClearButton(props) {
-  // console.log('clearbutton', props)
-  // const clearAllModels = this.props.clearAllModels
+  const { handlePress } = props;
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={() => {
-        props.ClearButton()
+        handlePress()
       }}
     >
       <Text style={styles.textStyle}> clear all models </Text>
@@ -23,7 +24,21 @@ function ClearButton(props) {
   )
 }
 
-export default ClearButton
+const mapStateToProps = state => {
+  return {
+    models: state.models
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    handlePress() {
+      dispatch(clearAllModels());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatch)(ClearButton);
 
 
 
