@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -53,6 +53,9 @@ export function modelsReducer(models = [], action) {
       return [...models, action.models]
     case ALL_MODELS:
       return models
+    case CLEAR_ALL_MODELS:
+      console.log('clear all models!')
+      return []
     default:
       return models
   }
