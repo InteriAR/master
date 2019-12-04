@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, TextInput, ImageBackground } from "react-native";
 import styles from "../../public/styles";
 import * as firebase from "firebase";
+import firestore from "firebase/firestore";
 
 import {
   Container,
@@ -24,25 +25,22 @@ class SignUp extends Component {
     };
   }
 
-  signUp(email, password) {
+  async signUp(email, password) {
     try {
       if (this.state.password < 6) {
         alert("Please enter atleast 6 characters");
         return;
       }
-      firebase
+      const data = await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          const userUid = auth.currentUser.uid;
-          console.log("USER ID=====>", userUid);
-          const db = firebase.firestore();
-          return db
-            .collection("users")
-            .doc(userUid)
-            .set({ email, password });
-        });
-      // .then(this.props.navigation.navigate("Profile"));
+        .createUserWithEmailAndPassword(email, password);
+
+      const userId = data.user.uid;
+      await firebase
+        .firestore()
+        .doc(`users/${email}`)
+        .set({ userId: userId, email: email, password: password });
+      this.props.navigation.navigate("Profile");
     } catch (error) {
       console.log(error.toString());
     }
