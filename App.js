@@ -24,13 +24,6 @@ import { ViroVRSceneNavigator, ViroARSceneNavigator } from "react-viro";
 
 import Navigator from "./screens/Navigator";
 import { firebaseConfig } from "./secrets";
-import Home from "./screens/home";
-import Categories from "./screens/categories";
-import AR from "./screens/ar";
-import InsideOverlay from "./screens/categories/inside-overlay";
-import DetailsScreen from "./screens/categories/details-screen";
-
-import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import * as firebase from "firebase";
 
 firebase.initializeApp(firebaseConfig);

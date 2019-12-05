@@ -1,3 +1,4 @@
+
 import {
   SET_TEXT,
   GET_API,
@@ -10,6 +11,7 @@ import {
   ALL_MODELS,
   GET_USER
 } from "./action-type";
+
 
 // const initialState = {
 //   text: '',
@@ -60,7 +62,21 @@ export function modelsReducer(models = [], action) {
       console.log("modelsReducer", [...models, action.models]);
       return [...models, action.models];
     case ALL_MODELS:
+
       return models;
+
+      return models
+    case CLEAR_ALL_MODELS:
+      console.log('clear all models!')
+      return []
+    case REMOVE_MODEL: {
+      console.log('inside remove model', action.model)
+      const removedFromList = models.filter(function (model) {
+        if (model.sku !== action.model.sku) return model
+      })
+      return removedFromList
+    }
+
     default:
       return models;
   }

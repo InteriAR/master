@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 
+// import styles from "../../public/styles";
 
-import { StyleSheet, Button, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Button, View, TouchableHighlight, Text } from 'react-native';
 
 import {
   ViroARScene,
@@ -18,15 +19,10 @@ import {
   ViroARPlaneSelector,
 } from 'react-viro';
 
-import SingleModel from './singleModelRender'
-import testModel from './test-models'
-import { selectedModelReducer } from '../../store/reducers';
+import { connect } from "react-redux";
+import { allModels, getSingleModel } from '../../store/actions'
 
-// let state = {
-//   text: "Initializing AR...",
-//   modelsRendered: [],
-//   selectedModel: {}
-// };
+import SingleModel from './singleModelRender'
 
 class SceneAR extends Component {
 
@@ -35,38 +31,28 @@ class SceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text: "Initializing AR..."
+      text: "Initializing AR...",
+      planeSelected: false
     };
-    // this.state = state
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this.renderModels = this.renderModels.bind(this)
     this.renderSelectedModel = this.renderSelectedModel.bind(this)
+    this.renderScanning = this.renderScanning.bind(this)
   }
 
-  // componentDidMount() {
-  //   console.log('inside component did mount', this.props)
-  //   const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
-  //   let modelToRender = this.renderSelectedModel(selectedModel)
-  //   this.setState(prevState => ({
-  //     modelsRendered: [...prevState.modelsRendered, modelToRender],
-  //     selectedModel: modelToRender
-  //   }))
-  //   console.log('this.state', this.state)
-  // }
-
-  // componentWillUnmount() {
-  //   // Remember state for the next mount
-  //   state = this.state;
-  // }
+  componentDidMount() {
+    this.props.getSelectedModel();
+    this.props.getAllModels();
+  }
 
   render() {
-    console.log('inside SceneAR', this.props)
+    // console.log('inside SceneAR', this.props)
 
-    const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
+    const selectedModel = this.props.selectedModel
     // const models = this.props.arSceneNavigator.viroAppProps.selectedModel
-    console.log('sceneAR inside render', selectedModel)
+    // console.log('sceneAR inside render', selectedModel)
 
     if (selectedModel.sku === undefined) {
       return (
@@ -87,11 +73,11 @@ class SceneAR extends Component {
       );
     } else {
       console.log('else sceneAR inside render', this.state, this.props)
-      const prevModels = this.props.arSceneNavigator.viroAppProps.models
+      const prevModels = this.props.models
       let models = this.renderModels(prevModels)
-
-      let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
-      // console.log('sceneAR inside render', models)
+      const scanningPrompt = this.renderScanning()
+      // let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
+      console.log('sceneAR inside render', models)
       return (
         <ViroARScene onTrackingUpdated={this._onInitialized} >
 
@@ -105,7 +91,13 @@ class SceneAR extends Component {
             color="#ffffff"
             intensity={250} />
 
-          <ViroARPlaneSelector onPlaneSelected={() => console.log('planeselected')}>
+
+          {scanningPrompt}
+
+          <ViroARPlaneSelector onPlaneSelected={() => {
+            console.log('planeselected')
+            this.setState({ planeSelected: true })
+          }}>
             {/* {modelToRender} */}
             {models}
           </ViroARPlaneSelector>
@@ -124,6 +116,20 @@ class SceneAR extends Component {
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
+  }
+  renderScanning() {
+    const scanningPromptText = (
+      <ViroText
+        text="scan room for surface"
+        textAlign="center"
+        textAlignVertical="top"
+        width={2} height={2}
+        style={{ fontFamily: "Arial", fontSize: 20, fontWeight: "400", fontStyle: "italic", color: "#ffffff" }}
+        position={[0, -1, -3]}
+        visible={!this.state.planeSelected}
+      />
+    )
+    return scanningPromptText;
   }
 
   renderSelectedModel(selected) {
@@ -160,9 +166,22 @@ var styles = StyleSheet.create({
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
-  },
+  }
 });
 
-// module.exports = HelloWorldSceneAR;
+const mapStateToProps = state => {
+  return {
+    models: state.models,
+    selectedModel: state.selectedModel
+  };
+};
 
-export default SceneAR
+const mapDispatchToProps = dispatch => {
+  return {
+    getSelectedModel: () => dispatch(getSingleModel()),
+    getAllModels: () => dispatch(allModels())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SceneAR);
+// export default SceneAR
