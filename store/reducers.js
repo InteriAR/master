@@ -9,7 +9,9 @@ import {
   SINGLE_MODEL,
   GET_SINGLE_MODEL,
   ALL_MODELS,
-  GET_USER
+  GET_USER,
+  CLEAR_ALL_MODELS,
+  REMOVE_MODEL
 } from "./action-type";
 
 
@@ -65,7 +67,6 @@ export function modelsReducer(models = [], action) {
 
       return models;
 
-      return models
     case CLEAR_ALL_MODELS:
       console.log('clear all models!')
       return []
