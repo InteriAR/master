@@ -1,26 +1,33 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { createLogger } from 'redux-logger'
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createLogger } from "redux-logger";
 // import thunk from 'redux-thunk'
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from "redux-thunk";
 
-import { dummyReducer, productsReducer, categoryReducer, modelsReducer, selectedModelReducer } from './reducers'
+import {
+  dummyReducer,
+  productsReducer,
+  categoryReducer,
+  modelsReducer,
+  selectedModelReducer,
+  getUserReducer
+} from "./reducers";
 
 const reducer = combineReducers({
   text: dummyReducer,
   products: productsReducer,
   category: categoryReducer,
   models: modelsReducer,
-  selectedModel: selectedModelReducer
-})
+  selectedModel: selectedModelReducer,
+  user: getUserReducer
+});
 
-const middleware = applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-const store = createStore(
-  reducer,
-  middleware
-)
+const middleware = applyMiddleware(
+  thunkMiddleware,
+  createLogger({ collapsed: true })
+);
+const store = createStore(reducer, middleware);
 
-export default store
-
+export default store;
 
 // import {createLogger} from 'redux-logger'
 
