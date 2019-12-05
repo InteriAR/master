@@ -4,5 +4,5 @@
 # Overview
 # Features
 # Process
-![wireframe](https://user-images.githubusercontent.com/53962625/70257149-c69d1b80-1757-11ea-8243-adaceaad6abc.png)
+![wireframe600](https://user-images.githubusercontent.com/53962625/70257277-fba96e00-1757-11ea-9918-35eb90edd11e.png)
 # Setup
