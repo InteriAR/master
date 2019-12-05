@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -56,6 +56,13 @@ export function modelsReducer(models = [], action) {
     case CLEAR_ALL_MODELS:
       console.log('clear all models!')
       return []
+    case REMOVE_MODEL: {
+      console.log('inside remove model', action.model)
+      const removedFromList = models.filter(function (model) {
+        if (model.sku !== action.model.sku) return model
+      })
+      return removedFromList
+    }
     default:
       return models
   }

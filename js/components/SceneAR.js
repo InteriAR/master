@@ -19,6 +19,9 @@ import {
   ViroARPlaneSelector,
 } from 'react-viro';
 
+import { connect } from "react-redux";
+import { allModels, getSingleModel } from '../../store/actions'
+
 import SingleModel from './singleModelRender'
 
 class SceneAR extends Component {
@@ -39,26 +42,15 @@ class SceneAR extends Component {
     this.renderScanning = this.renderScanning.bind(this)
   }
 
-  // componentDidMount() {
-  //   console.log('inside component did mount', this.props)
-  //   const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
-  //   let modelToRender = this.renderSelectedModel(selectedModel)
-  //   this.setState(prevState => ({
-  //     modelsRendered: [...prevState.modelsRendered, modelToRender],
-  //     selectedModel: modelToRender
-  //   }))
-  //   console.log('this.state', this.state)
-  // }
-
-  // componentWillUnmount() {
-  //   // Remember state for the next mount
-  //   state = this.state;
-  // }
+  componentDidMount() {
+    this.props.getSelectedModel();
+    this.props.getAllModels();
+  }
 
   render() {
     // console.log('inside SceneAR', this.props)
 
-    const selectedModel = this.props.arSceneNavigator.viroAppProps.selectedModel
+    const selectedModel = this.props.selectedModel
     // const models = this.props.arSceneNavigator.viroAppProps.selectedModel
     // console.log('sceneAR inside render', selectedModel)
 
@@ -81,11 +73,11 @@ class SceneAR extends Component {
       );
     } else {
       console.log('else sceneAR inside render', this.state, this.props)
-      const prevModels = this.props.arSceneNavigator.viroAppProps.models
+      const prevModels = this.props.models
       let models = this.renderModels(prevModels)
       const scanningPrompt = this.renderScanning()
       // let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
-      // console.log('sceneAR inside render', models)
+      console.log('sceneAR inside render', models)
       return (
         <ViroARScene onTrackingUpdated={this._onInitialized} >
 
@@ -177,5 +169,19 @@ var styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = state => {
+  return {
+    models: state.models,
+    selectedModel: state.selectedModel
+  };
+};
 
-export default SceneAR
+const mapDispatchToProps = dispatch => {
+  return {
+    getSelectedModel: () => dispatch(getSingleModel()),
+    getAllModels: () => dispatch(allModels())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SceneAR);
+// export default SceneAR

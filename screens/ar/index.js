@@ -30,19 +30,18 @@ class AR extends Component {
   componentDidMount() {
     this.props.getSelectedModel();
     this.props.getAllModels();
-    // this.setState({ viroAppProps: { selectedModel: this.props.selectedModel } })
   }
 
   render() {
-    console.log("AR screen index models", this.props.models);
-    const selectedModel = this.props.selectedModel;
-    const models = this.props.models;
-    console.log("AR screen selected model", selectedModel);
+    // console.log("AR screen index models", this.props.models);
+    // const selectedModel = this.props.selectedModel;
+    // const models = this.props.models;
+    // console.log("AR screen selected model", selectedModel);
     return (
       <View style={style.main}>
         <ViroARSceneNavigator
           initialScene={{ scene: SceneAR }}
-          viroAppProps={{ selectedModel, models }}
+        // viroAppProps={{ selectedModel, models }}
         />
         <View style={style.centerItems}>
           <TouchableHighlight
