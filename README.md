@@ -5,4 +5,11 @@
 # Features
 # Process
 ![wireframe600](https://user-images.githubusercontent.com/53962625/70257277-fba96e00-1757-11ea-9918-35eb90edd11e.png)
+# Tools
+- Viro React 
+- React Native
+- Firebase (has built-in authentication)
+- Wayfair 3d model API/ Sketchfab API/ other APIs
+
 # Setup
+
