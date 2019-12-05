@@ -11,8 +11,9 @@ import {
   ViroARPlaneSelector
 } from 'react-viro';
 
-// import product from './test-models'
 
+import { connect } from "react-redux";
+import { removeModel } from '../../store/actions'
 
 class SingleModel extends Component {
   constructor() {
@@ -20,13 +21,18 @@ class SingleModel extends Component {
 
     this.state = {
       rotation: [0, 0, 0],
-      lastClick: 0
+      lastClick: 0,
+      doubleClickCounter: 0
     };
 
     this._onRotate = this._onRotate.bind(this);
     this._onClick = this._onClick.bind(this);
     this.logPosition = this.logPosition.bind(this);
   }
+
+  // componentDidMount() {
+  //   this.props.removeThisModel()
+  // }
 
   render() {
     // this.logPosition()
@@ -58,11 +64,13 @@ class SingleModel extends Component {
         <Viro3DObject
           source={{ uri: product.glb }}
           type="GLB"
-          scale={[1.3, 1.3, 1.3]}
+          scale={[1, 1, 1]}
           position={product.position}
           rotation={this.state.rotation}
-          onClick = {this._onClick}
-          onRotate = {this._onRotate}
+
+          onClick={this._onClick}
+          onRotate={this._onRotate}
+
         />
 
         <ViroAmbientLight color="#ffffff" />
@@ -78,15 +86,24 @@ class SingleModel extends Component {
 
     if (clickedAt - this.state.lastClick < 1000) {
       console.log('double click detected');
+      this.setState({
+        doubleClickCounter: this.state.doubleClickCounter + 1
+      });
     }
-
     this.setState({
       lastClick: clickedAt
     });
+
+    if (this.state.doubleClickCounter === 5) {
+      const modelDoubleClicked = this.props.product
+      console.log('modelDoubleClicked', modelDoubleClicked)
+      this.props.removeThisModel(modelDoubleClicked)
+
+    }
   }
 
   _onRotate(rotateState, rotationFactor, source) {
-    console.log('before:', this.state.rotation[1]);
+    // console.log('before:', this.state.rotation[1]);
     if (rotateState === 2) {
       console.log('rotation state', rotateState, 'triggered');
       let yRot = this.state.rotation[1];
@@ -104,7 +121,7 @@ class SingleModel extends Component {
       this.setState(rot);
     }
 
-    console.log('after:', this.state.rotation[1]);
+    // console.log('after:', this.state.rotation[1]);
   }
 
   logPosition() {
@@ -113,5 +130,18 @@ class SingleModel extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    models: state.models,
+  };
+};
 
-export default SingleModel;
+const mapDispatchToProps = dispatch => {
+  return {
+    removeThisModel: (model) => dispatch(removeModel(model))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleModel);
+
+// export default SingleModel;

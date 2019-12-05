@@ -56,7 +56,6 @@ class Categories extends React.Component {
             this.props.clearSingleCategory();
           }}
         >
-          {/* <Text>category exists!</Text> */}
           <ProductsByCategory
             category={category}
             closeOverlay={this.closeOverlay}

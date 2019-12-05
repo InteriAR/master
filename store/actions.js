@@ -1,3 +1,4 @@
+
 import {
   SET_TEXT,
   GET_API,
@@ -14,6 +15,8 @@ import { sortByClassName, formatProducts } from "./utility-funcs.js";
 import axios from "axios";
 import { wayfairAuth } from "./../secrets";
 import * as firebase from "firebase";
+
+
 
 export const dummyAction = data => {
   return {
@@ -59,6 +62,13 @@ export const addModel = models => {
   };
 };
 
+export const removeModel = (model) => {
+  return {
+    type: REMOVE_MODEL,
+    model
+  }
+}
+
 export const allModels = () => {
   return {
     type: ALL_MODELS
@@ -78,12 +88,21 @@ export const getSingleModel = () => {
   };
 };
 
+
 export const getUser = userData => {
   return {
     type: GET_USER,
     user: userData
   };
 };
+
+export const clearAllModels = () => {
+  return {
+    type: CLEAR_ALL_MODELS
+  }
+}
+
+
 
 // export const loadModelsThunk = () => {
 //   return dispatch => {
