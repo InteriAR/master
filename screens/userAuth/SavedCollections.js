@@ -22,10 +22,11 @@ import {
 import * as firebase from "firebase";
 import styles from "../../public/styles";
 import { Button } from "react-native-elements";
+import { connect } from "react-redux";
 
-class SavedCollections extends Component {
-  constructor(props) {
-    super(props);
+class DisconnectedSavedCollections extends Component {
+  constructor() {
+    super();
     this.state = {
       //collections is going to be an array of objects with keys(room names) which contains and array of objects(furniture pieces)
       //ex. collections: [  {bedroom:[{bed}, {night stand}, {rug}], {livingRoom: [{couch}, {rug}]}     ]
@@ -38,7 +39,8 @@ class SavedCollections extends Component {
   //   }
 
   render() {
-    console.log("USERRRR", this);
+    const { user } = this.props;
+    console.log("PROPS IN COLLECTION", this.props);
     if (!this.state.collections.length) {
       return (
         <ImageBackground
@@ -66,5 +68,16 @@ class SavedCollections extends Component {
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const SavedCollections = connect(
+  mapStateToProps,
+  null
+)(DisconnectedSavedCollections);
 
 export default SavedCollections;
