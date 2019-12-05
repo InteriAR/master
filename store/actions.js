@@ -9,7 +9,9 @@ import {
   SINGLE_MODEL,
   GET_SINGLE_MODEL,
   ALL_MODELS,
-  GET_USER
+  GET_USER,
+  CLEAR_ALL_MODELS,
+  REMOVE_MODEL
 } from "./action-type";
 import { sortByClassName, formatProducts } from "./utility-funcs.js";
 import axios from "axios";
