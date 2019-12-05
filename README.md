@@ -23,15 +23,16 @@ Target market - users who have just moved into a new empty apartment/home and us
 - incorporate additional models for various room or event planning options 
 
 # Tools
-- Viro React 2.17.0 https://docs.viromedia.com/docs
-- React Native 0.59.9 https://facebook.github.io/react-native/docs/getting-started
-- Redux 4.0.4
-- Firebase 7.5.0 https://firebase.google.com/docs
+- [Viro React 2.17.0](https://docs.viromedia.com/docs)
+- [React Native 0.59.9](https://facebook.github.io/react-native/docs/getting-started)
+- [React 16.8.3](https://reactjs.org/)
+- [Redux 4.0.4](https://redux.js.org/introduction/getting-started)
+- [Firebase 7.5.0](https://firebase.google.com/docs)
   - built-in authentication
   - NoSQL database for saved collections using Cloud Firestore
-- Axios 0.19.0
-- Wayfair 3D Model API https://tech.wayfair.com/realtime-models/
-- Sketchfab API https://sketchfab.com/developers/download-api
+- [Axios 0.19.0](https://github.com/axios/axios)
+- [Wayfair 3D Model API](https://tech.wayfair.com/realtime-models/)
+- [Sketchfab API](https://sketchfab.com/developers/download-api)
 
 # Process
 ![wireframe600](https://user-images.githubusercontent.com/53962625/70257277-fba96e00-1757-11ea-9918-35eb90edd11e.png)
