@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 
+// import styles from "../../public/styles";
 
-import { StyleSheet, Button, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Button, View, TouchableHighlight, Text } from 'react-native';
 
 import {
   ViroARScene,
@@ -27,13 +28,15 @@ class SceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text: "Initializing AR..."
+      text: "Initializing AR...",
+      planeSelected: false
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this.renderModels = this.renderModels.bind(this)
     this.renderSelectedModel = this.renderSelectedModel.bind(this)
+    this.renderScanning = this.renderScanning.bind(this)
   }
 
   // componentDidMount() {
@@ -80,7 +83,7 @@ class SceneAR extends Component {
       console.log('else sceneAR inside render', this.state, this.props)
       const prevModels = this.props.arSceneNavigator.viroAppProps.models
       let models = this.renderModels(prevModels)
-
+      const scanningPrompt = this.renderScanning()
       // let modelToRender = this.renderSelectedModel(selectedModel) //can set position on this
       // console.log('sceneAR inside render', models)
       return (
@@ -96,7 +99,13 @@ class SceneAR extends Component {
             color="#ffffff"
             intensity={250} />
 
-          <ViroARPlaneSelector onPlaneSelected={() => console.log('planeselected')}>
+
+          {scanningPrompt}
+
+          <ViroARPlaneSelector onPlaneSelected={() => {
+            console.log('planeselected')
+            this.setState({ planeSelected: true })
+          }}>
             {/* {modelToRender} */}
             {models}
           </ViroARPlaneSelector>
@@ -115,6 +124,20 @@ class SceneAR extends Component {
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
+  }
+  renderScanning() {
+    const scanningPromptText = (
+      <ViroText
+        text="scan room for surface"
+        textAlign="center"
+        textAlignVertical="top"
+        width={2} height={2}
+        style={{ fontFamily: "Arial", fontSize: 20, fontWeight: "400", fontStyle: "italic", color: "#ffffff" }}
+        position={[0, -1, -3]}
+        visible={!this.state.planeSelected}
+      />
+    )
+    return scanningPromptText;
   }
 
   renderSelectedModel(selected) {
@@ -151,7 +174,7 @@ var styles = StyleSheet.create({
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
-  },
+  }
 });
 
 
