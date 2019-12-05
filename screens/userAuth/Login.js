@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, ImageBackground } from "react-native";
 import styles from "../../public/styles";
+import { getUser, getUserThunk } from "../../store/actions";
 import * as firebase from "firebase";
+import { connect } from "react-redux";
 
 import {
   Container,
@@ -14,7 +16,7 @@ import {
   Label
 } from "native-base";
 
-class Login extends Component {
+class DisconnectedLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,18 +25,20 @@ class Login extends Component {
     };
   }
 
-  loginUser(email, password) {
-    try {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(this.props.navigation.navigate("Profile"));
-    } catch (error) {
-      console.log(error.toString());
-    }
-  }
+  // loginUser(email, password) {
+  //   try {
+  //     firebase
+  //       .auth()
+  //       .signInWithEmailAndPassword(email, password)
+  //       .then(this.props.navigation.navigate("Profile"));
+  //   } catch (error) {
+  //     console.log(error.toString());
+  //   }
+  // }
 
   render() {
+    const { loginUser } = this.props;
+    // console.log("PROPSSSS", this.props);
     return (
       <ImageBackground
         style={styles.title}
@@ -66,9 +70,10 @@ class Login extends Component {
               full
               rounded
               success
-              onPress={() =>
-                this.loginUser(this.state.email, this.state.password)
-              }
+              onPress={() => {
+                loginUser(this.state.email, this.state.password);
+                this.props.navigation.navigate("Profile");
+              }}
             >
               <Text style={{ color: "white" }}> Login</Text>
             </Button>
@@ -78,5 +83,26 @@ class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser(email, password) {
+      try {
+        firebase.auth().signInWithEmailAndPassword(email, password);
+        dispatch(getUserThunk(email));
+      } catch (error) {
+        console.log(error.toString());
+      }
+    }
+  };
+};
+
+const Login = connect(mapStateToProps, mapDispatchToProps)(DisconnectedLogin);
 
 export default Login;

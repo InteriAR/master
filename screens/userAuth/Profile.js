@@ -52,9 +52,9 @@ class Profile extends Component {
 
             <TouchableOpacity
               style={styles.profileButton}
-              // onPress={() => {
-              //   this.props.navigation.navigate("AR");
-              // }}
+              onPress={() => {
+                this.props.navigation.navigate("SavedCollections");
+              }}
             >
               <Text style={styles.profileButtonText}>
                 View Saved Collections
