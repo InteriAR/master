@@ -101,6 +101,21 @@ const styles = {
     width: 300,
     flexDirection: "column",
     marginHorizontal: 60
+  },
+  filledSavedCollectionRoomTitles: {
+    flex: 1,
+    flexDirection: "row",
+    fontSize: 20,
+    textAlign: "center",
+    color: "#54320d"
+  },
+  filledSavedTextTitle: {
+    color: "#54320d",
+    textAlign: "center",
+    fontSize: 40,
+    padding: 20,
+    marginTop: 20,
+    fontFamily: "georgia"
   }
 };
 

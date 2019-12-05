@@ -17,8 +17,10 @@ import {
   Form,
   Input,
   Item,
-  Label
+  Label,
+  ListItem
 } from "native-base";
+import TouchableScale from "react-native-touchable-scale";
 import * as firebase from "firebase";
 import styles from "../../public/styles";
 import { Button } from "react-native-elements";
@@ -30,18 +32,21 @@ class DisconnectedSavedCollections extends Component {
     this.state = {
       //collections is going to be an array of objects with keys(room names) which contains and array of objects(furniture pieces)
       //ex. collections: [  {bedroom:[{bed}, {night stand}, {rug}], {livingRoom: [{couch}, {rug}]}     ]
-      collections: []
+      collections: {}
     };
   }
   //make a request to database to fetch collections and set state with them
-  //   componentDidMount(){
-  //       let data = firebase.firestore().collection('users').doc()
-  //   }
+  componentDidMount() {
+    const userGallery = this.props.user.Gallery[0];
+    this.setState({ collections: userGallery });
+  }
 
   render() {
-    const { user } = this.props;
-    console.log("PROPS IN COLLECTION", this.props);
-    if (!this.state.collections.length) {
+    const galleryNames = Object.keys(this.state.collections);
+    const numGalleries = Object.keys(this.state.collections).length;
+    const galleryInfo = Object.values(this.state.collections);
+    console.log("GALLERY INFO", galleryInfo);
+    if (!numGalleries) {
       return (
         <ImageBackground
           style={styles.title}
@@ -57,13 +62,29 @@ class DisconnectedSavedCollections extends Component {
       );
     } else {
       return (
-        <View>
-          {this.state.collections.map(collection => (
-            <Container>
-              <Text>{collection.name}</Text>
-            </Container>
-          ))}
-        </View>
+        <ImageBackground
+          style={styles.title}
+          source={require("../../public/Profile.jpeg")}
+        >
+          <View>
+            <Text style={styles.filledSavedTextTitle}>
+              Your Saved Collections:
+            </Text>
+          </View>
+          <View>
+            {galleryNames.map(name => (
+              <ListItem
+                key={name}
+                button
+                onPress={() => console.log("PRESSEDDDD")}
+              >
+                <Text style={styles.filledSavedCollectionRoomTitles}>
+                  {name}
+                </Text>
+              </ListItem>
+            ))}
+          </View>
+        </ImageBackground>
       );
     }
   }
