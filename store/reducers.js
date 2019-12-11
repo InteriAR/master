@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL, GET_EXAMINED, SET_EXAMINED } from './action-type'
 
 // const initialState = {
 //   text: '',
@@ -79,5 +79,15 @@ export function selectedModelReducer(selectedModel = {}, action) {
   }
 }
 
+export function examineModelReducer(examinedModel = {}, action) {
+  switch (action.type) {
+    case SET_EXAMINED:
+      return action.examinedModel;
+    case GET_EXAMINED:
+      return examinedModel;
+    default:
+      return examinedModel;
+  }
+}
 
 // export default { dummyReducer, productsReducer }

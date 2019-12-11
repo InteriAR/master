@@ -1,4 +1,4 @@
-import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL } from './action-type'
+import { SET_TEXT, GET_API, ALL_CATEGORIES, SINGLE_CATEGORY, CLEAR_CATEGORY, ADD_MODEL, SINGLE_MODEL, GET_SINGLE_MODEL, ALL_MODELS, CLEAR_ALL_MODELS, REMOVE_MODEL, SET_EXAMINED, GET_EXAMINED } from './action-type'
 import { sortByClassName, formatProducts } from './utility-funcs.js'
 import axios from 'axios'
 import { wayfairAuth } from './../secrets'
@@ -79,6 +79,18 @@ export const clearAllModels = () => {
   }
 }
 
+export const setExamined = model => {
+  return {
+    type: SET_EXAMINED,
+    examinedModel: model
+  };
+};
+
+export const getExamined = () => {
+  return {
+    type: GET_EXAMINED
+  };
+};
 
 // export const loadModelsThunk = () => {
 //   return dispatch => {

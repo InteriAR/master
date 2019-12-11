@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Overlay } from 'react-native-elements';
 
@@ -20,11 +20,12 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getModels();
+    console.log('productDetails::componentDidMount::this.props:', this.props);
   }
 
   render() {
     console.log('screens/productDetails::this.props:', this.props);
+    const m = this.props.examinedModel;
 
     return (
       <Overlay
@@ -33,17 +34,25 @@ class ProductDetails extends React.Component {
         onBackdropPress={this.closeOverlay}
       >
         <Text>
-          Hello World
+          Name: {m.name + '\n'}
+        </Text>
+        <Image
+          style={{width: 150, height: 150}}
+          source={{ uri: m.thumbnail }}
+        />
+        <Text>
+          Price: {m.price + '\n'}
+          SKU: {m.sku}
         </Text>
       </Overlay>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    getModels: () => dispatch(allModels())
+    examinedModel: state.examinedModel
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductDetails);
+export default connect(mapStateToProps, null)(ProductDetails);

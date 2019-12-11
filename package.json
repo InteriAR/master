@@ -5,6 +5,7 @@
   "scripts": {
     "prestart": "./node_modules/react-viro/bin/run_ngrok.sh",
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start-dem": "nodemon node_modules/react-native/local-cli/cli.js start",
     "react-devtools": "react-devtools",
     "test": "jest"
   },

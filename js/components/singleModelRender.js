@@ -11,7 +11,7 @@ import {
   ViroARPlaneSelector
 } from 'react-viro';
 import { connect } from "react-redux";
-import { removeModel } from '../../store/actions'
+import { removeModel, setExamined } from '../../store/actions'
 
 class SingleModel extends Component {
   constructor() {
@@ -33,8 +33,9 @@ class SingleModel extends Component {
   // }
 
   render() {
-    console.log('singleModelRender::this.props', this.props);
     const product = this.props.product;
+    console.log('singleModelRender::this.props', this.props);
+
     return (
 
       <ViroNode
@@ -82,8 +83,11 @@ class SingleModel extends Component {
     const clickedAt = new Date;
 
     if (clickedAt - this.state.lastClick < 1000) {
-      console.log('double click detected:', this.props.nav);
-      this.props.nav.navigate('ProductDetails');     
+      const chosen = this.props.models.filter(
+        model => model.name === this.props.product.name
+      );
+      this.props.examineThisModel(chosen[0]);
+      this.props.nav.navigate('ProductDetails');
     }
     this.setState({
       lastClick: clickedAt
@@ -144,12 +148,14 @@ class SingleModel extends Component {
 const mapStateToProps = state => {
   return {
     models: state.models,
+    examinedModel: state.examinedModel
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeThisModel: (model) => dispatch(removeModel(model))
+    removeThisModel: (model) => dispatch(removeModel(model)),
+    examineThisModel: model => dispatch(setExamined(model))
   };
 };
 
