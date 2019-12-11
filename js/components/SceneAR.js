@@ -43,6 +43,7 @@ class SceneAR extends Component {
   }
 
   componentDidMount() {
+    //console.log('SceneAR::this.props:', this.props);
     this.props.getSelectedModel();
     this.props.getAllModels();
   }
@@ -72,7 +73,7 @@ class SceneAR extends Component {
         </ViroARScene >
       );
     } else {
-      console.log('else sceneAR inside render', this.state, this.props)
+      console.log('SceneAR::render()::this.props', this.props);
       const prevModels = this.props.models
       let models = this.renderModels(prevModels)
       const scanningPrompt = this.renderScanning()
@@ -141,12 +142,13 @@ class SceneAR extends Component {
     let renderedModels = []
     if (prevModels) {
       const root = this
-      prevModels.forEach(function (product) {
+      prevModels.forEach(product => {
         renderedModels.push(
           <SingleModel
             key={product.sku}
             product={product}
-          // hitTestMethod={root._performARHitTest} //would like to get this to work
+            nav={this.props.arSceneNavigator.viroAppProps.nav}
+            // hitTestMethod={root._performARHitTest} //would like to get this to work
           />
         )
       })

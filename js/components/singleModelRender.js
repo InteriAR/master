@@ -10,8 +10,6 @@ import {
   ViroQuad,
   ViroARPlaneSelector
 } from 'react-viro';
-
-
 import { connect } from "react-redux";
 import { removeModel } from '../../store/actions'
 
@@ -35,7 +33,7 @@ class SingleModel extends Component {
   // }
 
   render() {
-    // this.logPosition()
+    console.log('singleModelRender::this.props', this.props);
     const product = this.props.product;
     return (
 
@@ -60,17 +58,15 @@ class SingleModel extends Component {
           outerAngle={45}
         />
 
-
         <Viro3DObject
           source={{ uri: product.glb }}
           type="GLB"
           scale={[1, 1, 1]}
           position={product.position}
           rotation={this.state.rotation}
-
           onClick={this._onClick}
           onRotate={this._onRotate}
-
+          onPinch={event => { console.log('pinched!: ', event) }}
         />
 
         <ViroAmbientLight color="#ffffff" />
@@ -81,6 +77,20 @@ class SingleModel extends Component {
     )
   }
 
+  // overlay
+  _onClick(position, source) {
+    const clickedAt = new Date;
+
+    if (clickedAt - this.state.lastClick < 1000) {
+      console.log('double click detected:', this.props.nav);
+      this.props.nav.navigate('ProductDetails');     
+    }
+    this.setState({
+      lastClick: clickedAt
+    });
+  }
+
+/*    deleting
   _onClick(position, source) {
     const clickedAt = new Date;
 
@@ -101,11 +111,12 @@ class SingleModel extends Component {
 
     }
   }
+*/
 
   _onRotate(rotateState, rotationFactor, source) {
     // console.log('before:', this.state.rotation[1]);
+    console.log('rotation state', rotateState, 'triggered');
     if (rotateState === 2) {
-      console.log('rotation state', rotateState, 'triggered');
       let yRot = this.state.rotation[1];
       let rot;
 

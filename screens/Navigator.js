@@ -3,6 +3,7 @@ import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import Home from "./home";
 import Categories from "./categories";
 import AR from "./ar";
+import ProductDetails from './productDetails';
 import Login from "./userAuth/Login.js";
 import SignUp from "./userAuth/SignUp.js";
 import Profile from "./userAuth/Profile.js";
@@ -15,9 +16,7 @@ const Navigator = createAppContainer(
       Home: { screen: Home },
       Categories: { screen: Categories, mode: "modal", header: "none" },
       AR: { screen: AR },
-      // Details: {
-      //   screen: DetailsScreen
-      // },
+      ProductDetails: { screen: ProductDetails, mode: 'modal', header: 'none' },
       Profile: { screen: Profile },
       Login: { screen: Login },
       SignUp: { screen: SignUp }

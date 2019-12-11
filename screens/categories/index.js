@@ -24,6 +24,7 @@ class Categories extends React.Component {
   }
 
   componentDidMount() {
+    console.log('screens/Categories/index.js::this.props:', this.props);
     this.props.getModels();
   }
 

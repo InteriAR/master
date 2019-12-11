@@ -27,13 +27,25 @@ import {
 import SceneAR from "../../js/components/SceneAR";
 
 class AR extends Component {
+  constructor() {
+    super();
+    this.state = {
+      viroAppProps: {}
+    }
+  }
+
   componentDidMount() {
+    this.setState({
+      viroAppProps: {
+        nav: this.props.navigation
+      }
+    });
     this.props.getSelectedModel();
     this.props.getAllModels();
   }
 
   render() {
-    // console.log("AR screen index models", this.props.models);
+     // console.log("AR screen index models", this.props.models);
     // const selectedModel = this.props.selectedModel;
     // const models = this.props.models;
     // console.log("AR screen selected model", selectedModel);
@@ -41,7 +53,7 @@ class AR extends Component {
       <View style={style.main}>
         <ViroARSceneNavigator
           initialScene={{ scene: SceneAR }}
-        // viroAppProps={{ selectedModel, models }}
+          viroAppProps={this.state.viroAppProps}
         />
         <View style={style.centerItems}>
           <TouchableHighlight
