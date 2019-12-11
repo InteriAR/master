@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Overlay } from 'react-native-elements';
+import styles from '../../public/styles';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -19,10 +20,6 @@ class ProductDetails extends React.Component {
     this.props.navigation.navigate('AR');
   }
 
-  componentDidMount() {
-    console.log('productDetails::componentDidMount::this.props:', this.props);
-  }
-
   render() {
     console.log('screens/productDetails::this.props:', this.props);
     const m = this.props.examinedModel;
@@ -32,12 +29,16 @@ class ProductDetails extends React.Component {
         isVisible={this.state.isVisible}
         transparent={true}
         onBackdropPress={this.closeOverlay}
+        style={[
+          styles.singleProductItem,
+          { backgroundColor: '#6e3b6e' }
+        ]}
       >
-        <Text>
+        <Text styles={styles.singleProductTitle}>
           Name: {m.name + '\n'}
         </Text>
         <Image
-          style={{width: 150, height: 150}}
+          style={styles.singleProduct}
           source={{ uri: m.thumbnail }}
         />
         <Text>
