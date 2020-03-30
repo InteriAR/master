@@ -81,39 +81,12 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      // <View style={localStyles.outer} >
-      //   <View style={localStyles.inner} >
-
-      //     <Text style={localStyles.titleText}>
-      //         Choose your desired experience:
-      //     </Text>
-
-      //     <TouchableHighlight style={localStyles.buttons}
-      //       onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-      //       underlayColor={'#68a0ff'} >
-
-      //       <Text style={localStyles.buttonText}>AR</Text>
-      //     </TouchableHighlight>
-
-      //     <TouchableHighlight style={localStyles.buttons}
-      //       onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
-      //       underlayColor={'#68a0ff'} >
-
-      //       <Text style={localStyles.buttonText}>VR</Text>
-      //     </TouchableHighlight>
-      //   </View>
-      //   <AppNavigator />
-      // </View>
       <Provider store={store}>
         <Navigator />
       </Provider>
     );
   }
-  // _getHomeNavigator() {
-  //   return (
-  //     <AppNavigator />
-  //   )
-  // }
+
   // Returns the ViroARSceneNavigator which will start the AR experience
   _getARNavigator() {
     return (

@@ -25,20 +25,19 @@ class DisconnectedLogin extends Component {
     };
   }
 
-  // loginUser(email, password) {
-  //   try {
-  //     firebase
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then(this.props.navigation.navigate("Profile"));
-  //   } catch (error) {
-  //     console.log(error.toString());
-  //   }
-  // }
+  loginUser(email, password) {
+    try {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(this.props.navigation.navigate("Profile"));
+    } catch (error) {
+      console.log(error.toString());
+    }
+  }
 
   render() {
     const { loginUser } = this.props;
-    // console.log("PROPSSSS", this.props);
     return (
       <ImageBackground
         style={styles.title}

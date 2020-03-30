@@ -69,8 +69,6 @@ class HelloWorldSceneAR extends Component {
             />
           </ViroNode>
         </ViroARPlaneSelector>
-
-        {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
       </ViroARScene>
     );
   }

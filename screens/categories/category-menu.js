@@ -31,12 +31,8 @@ export function Item({ category, productList, selected, handlePress }) {
 }
 
 function CategoryMenu(props) {
-  // console.log('props inside categoryMenu', props)
   const products = props.products;
   const formattedProducts = formatProducts(products);
-  // console.log('formattedProducts', formattedProducts)
-  // const categories = Object.keys(products)
-  // console.log('categories', categories)
   const { handlePress } = props;
 
   if (formattedProducts.length === 0) {
@@ -56,8 +52,6 @@ function CategoryMenu(props) {
               category={item.category}
               productList={item.productList}
               handlePress={handlePress}
-            // selected={!!selected.get(item.category)}
-            // onSelect={onSelect}
             />
           )}
           keyExtractor={item => item.category}

@@ -33,10 +33,6 @@ class AR extends Component {
   }
 
   render() {
-    // console.log("AR screen index models", this.props.models);
-    // const selectedModel = this.props.selectedModel;
-    // const models = this.props.models;
-    // console.log("AR screen selected model", selectedModel);
     return (
       <View style={style.main}>
         <ViroARSceneNavigator
@@ -53,11 +49,6 @@ class AR extends Component {
             />
           </TouchableHighlight>
         </View>
-        {/* <View style={style.centerItems}>
-                    <TouchableHighlight>
-                        <Image style={style.saveButton} source={require('../../js/res/button.jpg')} />
-                    </TouchableHighlight>
-                </View>             */}
       </View>
     );
   }

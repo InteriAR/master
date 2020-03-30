@@ -7,8 +7,8 @@ import Login from "./userAuth/Login.js";
 import SignUp from "./userAuth/SignUp.js";
 import Profile from "./userAuth/Profile.js";
 import SavedCollections from "./userAuth/SavedCollections";
-// import InsideOverlay from "./categories/inside-overlay";
-// import DetailsScreen from "./categories/details-screen";
+import InsideOverlay from "./categories/inside-overlay";
+import DetailsScreen from "./categories/details-screen";
 
 const Navigator = createAppContainer(
   createSwitchNavigator(
@@ -16,9 +16,9 @@ const Navigator = createAppContainer(
       Home: { screen: Home },
       Categories: { screen: Categories, mode: "modal", header: "none" },
       AR: { screen: AR },
-      // Details: {
-      //   screen: DetailsScreen
-      // },
+      Details: {
+        screen: DetailsScreen
+      },
       Profile: { screen: Profile },
       Login: { screen: Login },
       SignUp: { screen: SignUp },

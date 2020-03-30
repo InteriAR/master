@@ -41,23 +41,3 @@ const mapDispatch = dispatch => {
 export default connect(mapStateToProps, mapDispatch)(ClearButton);
 
 
-
-
-// import React, { Component } from 'react';
-// import {
-//   ViroButton
-// } from 'react-viro';
-
-// function DeleteButton() {
-//   console.log('inside delete button', this.props)
-//   const sourceImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Button-Purple.svg/1024px-Button-Purple.svg.png"
-//   const button =
-//     (<ViroButton
-//       source={{ uri: sourceImg }}
-//       position={this.props.position} />)
-//   return button
-// }
-
-// export default DeleteButton;
-
-
