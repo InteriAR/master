@@ -18,7 +18,7 @@
     "react-native": "0.59.9",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.5.1",
-    "react-native-reanimated": "^1.4.0",
+    "react-native-reanimated": "^2.10.0",
     "react-native-touchable-scale": "^2.1.0",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
